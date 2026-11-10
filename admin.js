@@ -30,10 +30,12 @@ async function isAdmin(user) {
 async function showSession() {
   const { data: { session } } = await db.auth.getSession();
 
-  if (session && await isAdmin(session.user)) {
-    loginPanel.hidden = true;
-    dashboard.hidden = false;
-    await loadProducts();
+if (session && await isAdmin(session.user)) {
+  loginPanel.hidden = true;
+  dashboard.hidden = false;
+  await loadProducts();
+  await loadPromotions();
+}
   } else {
     dashboard.hidden = true;
     loginPanel.hidden = false;
