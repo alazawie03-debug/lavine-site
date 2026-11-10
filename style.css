@@ -320,3 +320,35 @@
     height: 34px;
   }
 }
+
+/* Slider inside LA Vine Hero */
+
+.hero-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.hero-art .promotion-slider {
+  width: min(100%, 520px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  border-radius: 0;
+  overflow: hidden;
+  background: #ead9c4;
+  border: 1px solid #bd8c52;
+  box-shadow: none;
+}
+
+.hero-art .promotion-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .hero-art .promotion-slider {
+    width: min(100%, 420px);
+  }
+}
