@@ -46,8 +46,9 @@ ${sizes.length > 1 || (sizes.length === 1 && sizes[0] !== 'فري سايز') ? `
 <p class="variant-stock"></p>
 </div>
 ` : `<p class="product-details">${escapeHtml(details||'')}</p>`}
-<a class="product-link" href="https://wa.me/9647744040441?text=${msg}" target="_blank" rel="noopener">اطلبي عبر واتساب</a>
-</article>`;  }).join('');
+<a class="product-link" href="product.html?id=${p.id}">
+اضغط لرؤية باقي الألوان
+</a></article>`;  }).join('');
 })();
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
