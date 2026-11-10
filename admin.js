@@ -448,3 +448,137 @@ db.auth.onAuthStateChange(() => {
 
 resetForm();
 showSession();
+
+// LA Vine Promotions Management
+
+const promotionForm = $('promotion-form');
+
+if (promotionForm) {
+  promotionForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    message('promotion-message', 'جارٍ رفع العرض...');
+
+    try {
+      const { data: { user } } = await db.auth.getUser();
+
+      if (!await isAdmin(user)) {
+        throw new Error('ليس لديك صلاحية الإدارة.');
+      }
+
+      const file = $('promotion-image').files[0];
+
+      if (!file) throw new Error('اختر صورة العرض.');
+
+      if (file.type !== 'image/jpeg') {
+        throw new Error('ارفع الصورة بصيغة JPG فقط.');
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        throw new Error('حجم الصورة يجب ألا يتجاوز 5 MB.');
+      }
+
+      const path = `promotions/${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`;
+
+      const { error: uploadError } = await db.storage
+        .from('product-images')
+        .upload(path, file, {
+          contentType: 'image/jpeg'
+        });
+
+      if (uploadError) throw uploadError;
+
+      const imageUrl = db.storage
+        .from('product-images')
+        .getPublicUrl(path).data.publicUrl;
+
+      const { error } = await db.from('promotions').insert({
+        title: $('promotion-title').value.trim(),
+        description: $('promotion-description').value.trim(),
+        image_url: imageUrl,
+        link_url: $('promotion-link').value.trim(),
+        sort_order: Number($('promotion-order').value) || 0,
+        is_active: $('promotion-active').checked
+      });
+
+      if (error) throw error;
+
+      promotionForm.reset();
+      $('promotion-order').value = 0;
+      $('promotion-active').checked = true;
+
+      message('promotion-message', 'تمت إضافة العرض بنجاح.');
+      await loadPromotions();
+
+    } catch (error) {
+      message('promotion-message', 'تعذر إضافة العرض: ' + error.message, true);
+    }
+  });
+}
+
+async function loadPromotions() {
+  const box = $('admin-promotions');
+  if (!box) return;
+
+  const { data, error } = await db.from('promotions')
+    .select('*')
+    .order('sort_order', { ascending: true });
+
+  if (error) {
+    box.textContent = 'تعذر تحميل العروض: ' + error.message;
+    return;
+  }
+
+  if (!data.length) {
+    box.textContent = 'لا توجد عروض حالياً.';
+    return;
+  }
+
+  box.innerHTML = data.map(p => `
+    <article class="admin-product">
+      <img src="${esc(p.image_url)}" alt="">
+      <div>
+        <h3>${esc(p.title)}</h3>
+        <p>${p.is_active ? 'العرض مفعّل' : 'العرض متوقف'}</p>
+      </div>
+      <div class="admin-product-actions">
+        <button type="button" data-promo-toggle="${esc(p.id)}" data-active="${p.is_active}">
+          ${p.is_active ? 'إيقاف' : 'تفعيل'}
+        </button>
+        <button type="button" data-promo-delete="${esc(p.id)}">حذف</button>
+      </div>
+    </article>
+  `).join('');
+
+  box.querySelectorAll('[data-promo-toggle]').forEach(button => {
+    button.addEventListener('click', async () => {
+      const { error } = await db.from('promotions')
+        .update({ is_active: button.dataset.active !== 'true' })
+        .eq('id', button.dataset.promoToggle);
+
+      if (error) {
+        alert('تعذر تغيير حالة العرض: ' + error.message);
+        return;
+      }
+
+      await loadPromotions();
+    });
+  });
+
+  box.querySelectorAll('[data-promo-delete]').forEach(button => {
+    button.addEventListener('click', async () => {
+      if (!confirm('هل تريد حذف هذا العرض؟')) return;
+
+      const { error } = await db.from('promotions')
+        .delete()
+        .eq('id', button.dataset.promoDelete);
+
+      if (error) {
+        alert('تعذر حذف العرض: ' + error.message);
+        return;
+      }
+
+      await loadPromotions();
+    });
+  });
+}
