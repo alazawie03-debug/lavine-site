@@ -109,3 +109,108 @@ if (contactMenu && contactToggle) {
     }
   });
 }
+
+// LA Vine Promotions Slider
+
+async function loadPromotionsSlider() {
+  const slider = document.getElementById('promotion-slider');
+  const slidesBox = document.getElementById('promotion-slides');
+  const dotsBox = document.getElementById('promotion-dots');
+
+  if (!slider || !slidesBox || !dotsBox) return;
+
+  const db = window.supabase.createClient(
+    window.LAVINE_SUPABASE_URL,
+    window.LAVINE_SUPABASE_KEY
+  );
+
+  const { data, error } = await db
+    .from('promotions')
+    .select('id, title, description, image_url, link_url')
+    .eq('is_active', true)
+    .order('sort_order', { ascending: true });
+
+  if (error || !data || !data.length) {
+    slider.hidden = true;
+    return;
+  }
+
+  let currentIndex = 0;
+  let timer = null;
+
+  slidesBox.innerHTML = data.map((item, index) => {
+    const image = `<img src="${escapePromo(item.image_url)}"
+      alt="${escapePromo(item.title)}">`;
+
+    const content = item.link_url
+      ? `<a href="${escapePromo(item.link_url)}">${image}</a>`
+      : image;
+
+    return `<div class="promotion-slide ${index === 0 ? 'active' : ''}">
+      ${content}
+    </div>`;
+  }).join('');
+
+  dotsBox.innerHTML = data.map((item, index) =>
+    `<button type="button"
+      class="promotion-dot ${index === 0 ? 'active' : ''}"
+      aria-label="العرض ${index + 1}"
+      data-index="${index}"></button>`
+  ).join('');
+
+  const slides = [...slidesBox.querySelectorAll('.promotion-slide')];
+  const dots = [...dotsBox.querySelectorAll('.promotion-dot')];
+
+  function showSlide(index) {
+    currentIndex = (index + data.length) % data.length;
+
+    slides.forEach((slide, i) =>
+      slide.classList.toggle('active', i === currentIndex)
+    );
+
+    dots.forEach((dot, i) =>
+      dot.classList.toggle('active', i === currentIndex)
+    );
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    if (data.length > 1) {
+      timer = setInterval(() => showSlide(currentIndex + 1), 4000);
+    }
+  }
+
+  slider.querySelector('.promotion-prev')
+    .addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+      startTimer();
+    });
+
+  slider.querySelector('.promotion-next')
+    .addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+      startTimer();
+    });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      showSlide(Number(dot.dataset.index));
+      startTimer();
+    });
+  });
+
+  slider.hidden = false;
+  startTimer();
+}
+
+function escapePromo(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[char]);
+}
+
+loadPromotionsSlider();
