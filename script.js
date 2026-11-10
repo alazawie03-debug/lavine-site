@@ -114,8 +114,14 @@ document.addEventListener('change', async (e) => {
       return;
     }
 
-if (sizeSelect.tagName === 'INPUT') {
-  const freeSize = data.find(item => item.size === 'فري سايز');
+const totalQuantity = (data || []).reduce(
+  (sum, item) => sum + Number(item.quantity || 0),
+  0
+);
+
+stockText.textContent = totalQuantity > 0
+  ? `الكمية المتوفرة: ${totalQuantity} قطعة`
+  : 'غير متوفر حالياً';  const freeSize = data.find(item => item.size === 'فري سايز');
 
   stockText.textContent = freeSize
     ? `فري سايز — المتبقي: ${freeSize.quantity} قطعة`
