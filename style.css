@@ -202,3 +202,22 @@
     gap: 20px;
   }
 }
+
+
+/* WhatsApp Order Button */
+#detail-whatsapp {
+  display: block;
+  background: #25D366;
+  color: #ffffff !important;
+  border: 2px solid #25D366;
+  text-align: center;
+  font-weight: 800;
+  border-radius: 10px;
+  padding: 16px;
+  transition: 0.3s ease;
+}
+
+#detail-whatsapp:hover {
+  background: #128C4E;
+  border-color: #128C4E;
+}
