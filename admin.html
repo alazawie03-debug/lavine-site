@@ -2,49 +2,63 @@
 <section id="dashboard" class="admin-panel" hidden><div class="dash-heading"><div><p class="eyebrow">إدارة التشكيلة</p><h1>منتجات LA Vine</h1></div><button id="logout" class="secondary-btn">تسجيل الخروج</button>
 </div>
 
-<!-- إدارة العروض المتحركة -->
-<section class="admin-panel promotion-admin">
-  <h2>إدارة العروض المتحركة</h2>
-  <p>إضافة وتعديل صور العروض التي تظهر في بداية المتجر.</p>
+
+<!-- إدارة العروض -->
+<section class="admin-panel promotion-admin" id="promotions-tab">
+  <h2>إدارة الحملات والعروض</h2>
+  <p>إضافة حملات متعددة الصور مع الخصومات والطلب عبر واتساب.</p>
 
   <form id="promotion-form">
-    <label>
-      عنوان العرض
+    <input id="promotion-id" type="hidden">
+
+    <label>عنوان الحملة
       <input id="promotion-title" type="text" required>
     </label>
 
-    <label>
-      وصف العرض
-      <input id="promotion-description" type="text">
+    <label>وصف الحملة
+      <textarea id="promotion-description" rows="2"></textarea>
     </label>
 
-    <label>
-      صورة العرض (JPG)
-      <input id="promotion-image" type="file" accept="image/jpeg" required>
+    <label>نص الخصم
+      <input id="promotion-discount" type="text" placeholder="مثلاً خصم 30%">
     </label>
 
-    <label>
-      رابط عند الضغط على الصورة (اختياري)
-      <input id="promotion-link" type="text" placeholder="مثلاً رابط منتج">
+    <label>صور الحملة (يمكن اختيار أكثر من صورة JPG)
+      <input id="promotion-images" type="file" accept="image/jpeg" multiple>
     </label>
 
-    <label>
-      ترتيب العرض
+    <label>رقم واتساب
+      <input id="promotion-whatsapp" type="text" value="9647744040441">
+    </label>
+
+    <label>رسالة واتساب
+      <textarea id="promotion-message-text" rows="2" placeholder="مرحباً، أريد الاستفسار عن العرض"></textarea>
+    </label>
+
+    <label>نص زر الطلب
+      <input id="promotion-cta" type="text" value="اطلبي الآن عبر واتساب">
+    </label>
+
+    <label>ترتيب الحملة
       <input id="promotion-order" type="number" value="0">
     </label>
 
     <label class="checkbox-label">
       <input id="promotion-active" type="checkbox" checked>
-      العرض مفعّل
+      الحملة مفعّلة
     </label>
 
-    <button type="submit" class="admin-btn">إضافة العرض</button>
+    <button type="submit" class="admin-btn">حفظ الحملة</button>
+    <button type="button" id="promotion-reset" class="secondary-btn">حملة جديدة</button>
+
     <p id="promotion-message" class="form-message"></p>
+    <div id="promotion-images-preview"></div>
   </form>
 
-  <h3>العروض الحالية</h3>
-  <div id="admin-promotions">جارٍ تحميل العروض...</div>
+  <h3>الحملات الحالية</h3>
+  <div id="admin-promotions">جارٍ تحميل الحملات...</div>
 </section>
+
 
 <form id="product-form" class="product-form">
 <input id="product-id" type="hidden"><div class="form-grid"><label>اسم المنتج *<input id="name" required maxlength="120"></label><label>السعر بالدينار العراقي *<input id="price" type="number" min="0" step="1" required></label><label>التصنيف<input id="category" placeholder="بجامات، أطقم، ملابس منزلية"></label><div class="full-width">
