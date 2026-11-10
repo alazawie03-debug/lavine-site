@@ -6,3 +6,38 @@
   object-fit: contain;
   display: block;
 }
+
+/* LA Vine - Luxury Hero Image */
+.hero-art {
+  position: relative;
+  width: min(100%, 520px);
+  min-height: 520px;
+  margin: auto;
+  padding: 20px;
+  background: #ead9c5;
+  border: 1px solid #c49a62;
+  border-radius: 260px 260px 0 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-product-image {
+  width: 100%;
+  height: 480px;
+  object-fit: contain;
+  display: block;
+  border-radius: 240px 240px 0 0;
+}
+
+@media (max-width: 768px) {
+  .hero-art {
+    width: 90%;
+    min-height: 350px;
+  }
+
+  .hero-product-image {
+    height: 330px;
+  }
+}
