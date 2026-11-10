@@ -41,3 +41,65 @@
     height: 330px;
   }
 }
+/* LA Vine - Contact Menu */
+.contact-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.contact-toggle {
+  background: #493027;
+  color: #fff;
+  border: 1px solid #b28a55;
+  border-radius: 8px;
+  padding: 12px 22px;
+  font-family: Cairo, sans-serif;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-toggle:hover {
+  background: #a77c49;
+}
+
+.contact-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 190px;
+  padding: 12px;
+  background: #fffaf3;
+  border: 1px solid #d6b98e;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px #49302725;
+  z-index: 9999;
+  gap: 12px;
+}
+
+.contact-menu:focus-within .contact-dropdown {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  color: #493027;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.contact-dropdown a:hover {
+  background: #f1e5d5;
+}
+
+.contact-dropdown img {
+  width: 27px;
+  height: 27px;
+  object-fit: contain;
+}
+
