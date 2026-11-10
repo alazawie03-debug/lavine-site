@@ -28,12 +28,9 @@ return `<article class="product" data-product-id="${p.id}" data-colors="${escape
 </div>
 <strong>${Number(p.price).toLocaleString('en-US')} د.ع</strong>
 </div>
-${colors.length ? `
-<div class="variant-options">
-<label>اختاري اللون</label>
-<select class="variant-color">
-<option value="">اختاري اللون</option>
-${colors.map(c => `<option value="${escapeHtml(c.name)}">${escapeHtml(c.name)}</option>`).join('')}
+<a class="product-link" href="product.html?id=${p.id}">
+اضغط لرؤية باقي الألوان
+</a>
 </select>
 ${sizes.length > 1 || (sizes.length === 1 && sizes[0] !== 'فري سايز') ? `
 <label>اختاري المقاس</label>
