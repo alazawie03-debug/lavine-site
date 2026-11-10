@@ -117,3 +117,88 @@
   visibility: visible;
   transform: translateY(0);
 }
+
+
+/* LA Vine Product Details Page */
+.product-details-page {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.product-detail-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: start;
+  background: #fffaf5;
+  padding: 25px;
+  border-radius: 18px;
+}
+
+.product-detail-image {
+  background: #f4ece4;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.product-detail-image img {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.product-detail-info h1 {
+  color: #4b3027;
+  margin-top: 0;
+}
+
+.detail-price {
+  display: block;
+  color: #9a704c;
+  font-size: 23px;
+  margin: 15px 0;
+}
+
+.detail-colors,
+.detail-sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 22px;
+}
+
+.detail-color,
+.detail-size {
+  border: 1px solid #b99a7b;
+  background: white;
+  color: #4b3027;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.detail-color.active,
+.detail-size.active {
+  background: #4b3027;
+  color: white;
+}
+
+#detail-stock {
+  color: #806047;
+  margin: 15px 0;
+}
+
+@media (max-width: 700px) {
+  .product-details-page {
+    margin: 20px auto;
+    padding: 12px;
+  }
+
+  .product-detail-card {
+    grid-template-columns: 1fr;
+    padding: 15px;
+    gap: 20px;
+  }
+}
