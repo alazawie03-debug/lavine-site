@@ -114,22 +114,27 @@ document.addEventListener('change', async (e) => {
       return;
     }
 
-const totalQuantity = (data || []).reduce(
-  (sum, item) => sum + Number(item.quantity || 0),
-  0
-);
+if (sizeSelect.tagName === 'INPUT') {
+  const freeSize = data.find(item => item.size === 'فري سايز');
 
-stockText.textContent = totalQuantity > 0
-  ? `الكمية المتوفرة: ${totalQuantity} قطعة`
-  : 'غير متوفر حالياً';  const freeSize = data.find(item => item.size === 'فري سايز');
-
-  stockText.textContent = freeSize
-    ? `فري سايز — المتبقي: ${freeSize.quantity} قطعة`
+  stockText.textContent = freeSize && Number(freeSize.quantity) > 0
+    ? `الكمية المتوفرة: ${freeSize.quantity} قطعة`
     : 'غير متوفر حالياً';
 
   return;
 }
 
+data.forEach(item => {
+  const option = document.createElement('option');
+  option.value = item.size;
+  option.textContent = item.size;
+  option.dataset.quantity = item.quantity;
+  sizeSelect.appendChild(option);
+});
+
+if (!data.length) {
+  stockText.textContent = 'غير متوفر حالياً';
+}
 data.forEach(item => {
   const option = document.createElement('option');
   option.value = item.size;
