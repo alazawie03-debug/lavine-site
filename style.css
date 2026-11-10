@@ -77,10 +77,7 @@
   gap: 12px;
 }
 
-.contact-menu:focus-within .contact-dropdown {
-  display: flex;
-  flex-direction: column;
-}
+
 
 .contact-dropdown a {
   display: flex;
