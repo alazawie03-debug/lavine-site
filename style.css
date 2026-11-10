@@ -226,12 +226,12 @@
 
 .promotion-slider {
   position: relative;
-  width: min(1200px, 94%);
+  width: min(650px, 92%);
+  aspect-ratio: 1 / 1;
   margin: 25px auto;
   overflow: hidden;
   border-radius: 18px;
   background: #f5eee6;
-  aspect-ratio: 16 / 6;
   direction: ltr;
 }
 
