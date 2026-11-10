@@ -51,3 +51,60 @@ if (contactMenu && contactToggle) {
     }
   });
 }
+
+
+// LA Vine Color and Size Selection
+document.addEventListener('change', async (e) => {
+  if (e.target.classList.contains('variant-color')) {
+    const card = e.target.closest('.product');
+    const sizeSelect = card.querySelector('.variant-size');
+    const stockText = card.querySelector('.variant-stock');
+
+    const color = e.target.value;
+    const productId = card.dataset.productId;
+
+    sizeSelect.innerHTML = '<option value="">اختر المقاس</option>';
+    stockText.textContent = '';
+
+    if (!color) return;
+
+    const db = window.supabase.createClient(
+      window.LAVINE_SUPABASE_URL,
+      window.LAVINE_SUPABASE_KEY
+    );
+
+    const { data, error } = await db
+      .from('product_variants')
+      .select('size, quantity')
+      .eq('product_id', productId)
+      .eq('color_name', color)
+      .gt('quantity', 0);
+
+    if (error) {
+      stockText.textContent = 'تعذر تحميل المقاسات';
+      return;
+    }
+
+    data.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.size;
+      option.textContent = item.size;
+      option.dataset.quantity = item.quantity;
+      sizeSelect.appendChild(option);
+    });
+
+    if (!data.length) {
+      stockText.textContent = 'غير متوفر حالياً';
+    }
+  }
+
+  if (e.target.classList.contains('variant-size')) {
+    const option = e.target.selectedOptions[0];
+    const stockText = e.target.closest('.product')
+      .querySelector('.variant-stock');
+
+    stockText.textContent = option.value
+      ? `المتبقي: ${option.dataset.quantity} قطعة`
+      : '';
+  }
+});
