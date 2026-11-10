@@ -23,3 +23,31 @@ nav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>nav.c
   }).join('');
 })();
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+// LA Vine Contact Menu
+const contactMenu = document.querySelector('.contact-menu');
+const contactToggle = document.querySelector('.contact-toggle');
+
+if (contactMenu && contactToggle) {
+  contactToggle.setAttribute('aria-expanded', 'false');
+
+  contactToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const opened = contactMenu.classList.toggle('open');
+    contactToggle.setAttribute('aria-expanded', opened);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!contactMenu.contains(e.target)) {
+      contactMenu.classList.remove('open');
+      contactToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      contactMenu.classList.remove('open');
+      contactToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
