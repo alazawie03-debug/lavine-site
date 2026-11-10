@@ -27,22 +27,25 @@ async function isAdmin(user) {
   return !error && !!data;
 }
 
+
 async function showSession() {
   const { data: { session } } = await db.auth.getSession();
 
-if (session && await isAdmin(session.user)) {
-  loginPanel.hidden = true;
-  dashboard.hidden = false;
-  await loadProducts();
-  await loadPromotions();
-}
+  if (session && await isAdmin(session.user)) {
+    loginPanel.hidden = true;
+    dashboard.hidden = false;
+    await loadProducts();
+    await loadPromotions();
   } else {
     dashboard.hidden = true;
     loginPanel.hidden = false;
+
     if (session) {
       message('login-message', 'هذا الحساب غير مخوّل لإدارة المتجر.', true);
     }
   }
+}
+
 }
 
 $('login-form').addEventListener('submit', async e => {
