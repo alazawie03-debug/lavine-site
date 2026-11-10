@@ -103,3 +103,20 @@
   object-fit: contain;
 }
 
+/* Smooth Contact Menu Animation */
+.contact-dropdown {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease,
+              transform 0.25s ease,
+              visibility 0.25s ease;
+}
+
+.contact-menu.open .contact-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
