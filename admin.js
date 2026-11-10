@@ -46,7 +46,6 @@ async function showSession() {
   }
 }
 
-}
 
 $('login-form').addEventListener('submit', async e => {
   e.preventDefault();
