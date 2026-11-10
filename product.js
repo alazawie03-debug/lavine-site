@@ -113,10 +113,11 @@ async function loadSizes(product, color) {
     .eq('color_name', color?.name || '')
     .gt('quantity', 0);
 
-  if (error) {
-    stockText.textContent = 'تعذر تحميل المقاسات';
-    return;
-  }
+if (error) {
+  console.error('Stock Error:', error);
+  stockText.textContent = 'سبب المشكلة: ' + error.message;
+  return;
+}
 
   if (!data?.length) {
     stockText.textContent = 'غير متوفر حالياً';
