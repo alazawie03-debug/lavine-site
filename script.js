@@ -16,8 +16,10 @@ nav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>nav.c
   container.innerHTML=data.map(p=>{
     const sizes=Array.isArray(p.sizes)?p.sizes:[];
 const colors = Array.isArray(p.colors) ? p.colors : [];
-    const details=[sizes.length?'المقاسات: '+sizes.join('، '):'',colors.length?'الألوان: '+colors.join('، '):''].filter(Boolean).join(' · ');
-    const msg=encodeURIComponent('مرحباً، أرغب بطلب: '+p.name+' | السعر: '+Number(p.price).toLocaleString('en-US')+' د.ع');
+const details = [
+  sizes.length ? 'المقاسات: ' + sizes.join('، ') : '',
+  colors.length ? 'الألوان: ' + colors.map(c => c.name).join('، ') : ''
+].filter(Boolean).join(' · ');    const msg=encodeURIComponent('مرحباً، أرغب بطلب: '+p.name+' | السعر: '+Number(p.price).toLocaleString('en-US')+' د.ع');
     const image=p.image_url?`<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}" loading="lazy">`:'<span>LA VINE</span>';
 return `<article class="product" data-product-id="${p.id}">
 <div class="product-image dynamic-image">${image}</div>
