@@ -352,3 +352,49 @@
     width: min(100%, 420px);
   }
 }
+
+/* LA Vine - Square Hero Slider */
+
+.hero-art {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+.hero-art::before,
+.hero-art::after {
+  display: none !important;
+}
+
+.hero-art .promotion-slider {
+  width: min(100%, 520px) !important;
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.hero-art .promotion-slide {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-art .promotion-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+@media (max-width: 768px) {
+  .hero-art .promotion-slider {
+    width: min(100%, 420px) !important;
+  }
+}
