@@ -37,10 +37,14 @@ ${colors.length ? `
 <option value="">اختاري اللون</option>
 ${colors.map(c => `<option value="${escapeHtml(c.name)}">${escapeHtml(c.name)}</option>`).join('')}
 </select>
+${sizes.length > 1 || (sizes.length === 1 && sizes[0] !== 'فري سايز') ? `
 <label>اختاري المقاس</label>
 <select class="variant-size" disabled>
 <option value="">اختاري اللون أولاً</option>
 </select>
+` : `
+<input type="hidden" class="variant-size" value="فري سايز">
+`}
 <p class="variant-stock"></p>
 </div>
 ` : `<p class="product-details">${escapeHtml(details||'')}</p>`}
