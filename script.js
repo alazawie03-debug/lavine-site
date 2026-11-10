@@ -21,7 +21,26 @@ const details = [
   colors.length ? 'الألوان: ' + colors.map(c => c.name).join('، ') : ''
 ].filter(Boolean).join(' · ');    const msg=encodeURIComponent('مرحباً، أرغب بطلب: '+p.name+' | السعر: '+Number(p.price).toLocaleString('en-US')+' د.ع');
     const image=p.image_url?`<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}" loading="lazy">`:'<span>LA VINE</span>';
-return `<article class="product" data-product-id="${p.id}" data-colors="${escapeHtml(JSON.stringify(colors))}" onclick="if(!event.target.closest('a,button,select,input')) location.href='product.html?id=${p.id}'"><div class="product-image dynamic-image">${image}</div><div class="product-info">
+
+return `<article class="product" data-product-id="${p.id}"
+data-colors="${escapeHtml(JSON.stringify(colors))}"
+onclick="if(!event.target.closest('a,button,select,input')) location.href='product.html?id=${p.id}'">
+
+<div class="product-image dynamic-image">${image}</div>
+
+<div class="product-info">
+  <div>
+    <h3>${escapeHtml(p.name)}</h3>
+    <p>${escapeHtml(p.description || details || 'أناقة تختارينها')}</p>
+  </div>
+  <strong>${Number(p.price).toLocaleString('en-US')} د.ع</strong>
+</div>
+
+<a class="product-link" href="product.html?id=${p.id}">
+  اضغط لرؤية باقي الألوان
+</a>
+
+</article>`;
 <div>
 <h3>${escapeHtml(p.name)}</h3>
 <p>${escapeHtml(p.description||details||'أناقة تختارينها')}</p>
