@@ -667,7 +667,4 @@ async function loadPromotions() {
   });
 }
 
-      await loadPromotions();
-    });
-  });
-}
+   
