@@ -114,13 +114,23 @@ document.addEventListener('change', async (e) => {
       return;
     }
 
-    data.forEach(item => {
-      const option = document.createElement('option');
-      option.value = item.size;
-      option.textContent = item.size;
-      option.dataset.quantity = item.quantity;
-      sizeSelect.appendChild(option);
-    });
+if (sizeSelect.tagName === 'INPUT') {
+  const freeSize = data.find(item => item.size === 'فري سايز');
+
+  stockText.textContent = freeSize
+    ? `فري سايز — المتبقي: ${freeSize.quantity} قطعة`
+    : 'غير متوفر حالياً';
+
+  return;
+}
+
+data.forEach(item => {
+  const option = document.createElement('option');
+  option.value = item.size;
+  option.textContent = item.size;
+  option.dataset.quantity = item.quantity;
+  sizeSelect.appendChild(option);
+});
 
     if (!data.length) {
       stockText.textContent = 'غير متوفر حالياً';
