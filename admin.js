@@ -453,69 +453,116 @@ db.auth.onAuthStateChange(() => {
 resetForm();
 showSession();
 
+
 // LA Vine Promotions Management
 
 const promotionForm = $('promotion-form');
+let currentPromotionImages = [];
+
+function resetPromotionForm() {
+  promotionForm.reset();
+  $('promotion-id').value = '';
+  $('promotion-order').value = 0;
+  $('promotion-whatsapp').value = '9647744040441';
+  $('promotion-cta').value = 'اطلبي الآن عبر واتساب';
+  $('promotion-active').checked = true;
+  currentPromotionImages = [];
+  $('promotion-images-preview').innerHTML = '';
+  message('promotion-message', '');
+}
+
+$('promotion-reset')?.addEventListener('click', resetPromotionForm);
+
+function showPromotionImages(urls) {
+  const preview = $('promotion-images-preview');
+  if (!preview) return;
+
+  preview.innerHTML = urls.map(url =>
+    `<img src="${esc(url)}" alt="" style="width:90px;height:90px;object-fit:cover;border-radius:8px;margin:5px">`
+  ).join('');
+}
 
 if (promotionForm) {
   promotionForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    message('promotion-message', 'جارٍ رفع العرض...');
+    message('promotion-message', 'جارٍ حفظ الحملة ورفع الصور...');
 
     try {
       const { data: { user } } = await db.auth.getUser();
+      if (!await isAdmin(user)) throw new Error('ليس لديك صلاحية الإدارة.');
 
-      if (!await isAdmin(user)) {
-        throw new Error('ليس لديك صلاحية الإدارة.');
+      const files = Array.from($('promotion-images').files);
+      let imageUrls = [...currentPromotionImages];
+
+      for (const file of files) {
+        if (file.type !== 'image/jpeg') {
+          throw new Error('ارفع الصور بصيغة JPG فقط.');
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+          throw new Error('حجم كل صورة يجب ألا يتجاوز 5 MB.');
+        }
+
+        const path = `promotions/${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`;
+
+        const { error: uploadError } = await db.storage
+          .from('product-images')
+          .upload(path, file, { contentType: 'image/jpeg' });
+
+        if (uploadError) throw uploadError;
+
+        const imageUrl = db.storage
+          .from('product-images')
+          .getPublicUrl(path).data.publicUrl;
+
+        imageUrls.push(imageUrl);
       }
 
-      const file = $('promotion-image').files[0];
-
-      if (!file) throw new Error('اختر صورة العرض.');
-
-      if (file.type !== 'image/jpeg') {
-        throw new Error('ارفع الصورة بصيغة JPG فقط.');
+      if (!imageUrls.length) {
+        throw new Error('اختر صورة واحدة على الأقل للحملة.');
       }
 
-      if (file.size > 5 * 1024 * 1024) {
-        throw new Error('حجم الصورة يجب ألا يتجاوز 5 MB.');
-      }
+      const whatsappNumber = $('promotion-whatsapp').value.replace(/\D/g, '');
 
-      const path = `promotions/${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`;
+      if (!whatsappNumber) throw new Error('أدخل رقم واتساب صحيحاً.');
 
-      const { error: uploadError } = await db.storage
-        .from('product-images')
-        .upload(path, file, {
-          contentType: 'image/jpeg'
-        });
-
-      if (uploadError) throw uploadError;
-
-      const imageUrl = db.storage
-        .from('product-images')
-        .getPublicUrl(path).data.publicUrl;
-
-      const { error } = await db.from('promotions').insert({
+      const promotionData = {
         title: $('promotion-title').value.trim(),
         description: $('promotion-description').value.trim(),
-        image_url: imageUrl,
-        link_url: $('promotion-link').value.trim(),
+        discount_text: $('promotion-discount').value.trim(),
+        image_url: imageUrls[0],
+        image_urls: imageUrls,
+        whatsapp_number: whatsappNumber,
+        whatsapp_message: $('promotion-message-text').value.trim(),
+        cta_text: $('promotion-cta').value.trim() || 'اطلبي الآن عبر واتساب',
         sort_order: Number($('promotion-order').value) || 0,
         is_active: $('promotion-active').checked
-      });
+      };
 
-      if (error) throw error;
+      const promotionId = $('promotion-id').value;
 
-      promotionForm.reset();
-      $('promotion-order').value = 0;
-      $('promotion-active').checked = true;
+      let result;
 
-      message('promotion-message', 'تمت إضافة العرض بنجاح.');
+      if (promotionId) {
+        result = await db.from('promotions')
+          .update(promotionData)
+          .eq('id', promotionId);
+      } else {
+        result = await db.from('promotions').insert(promotionData);
+      }
+
+      if (result.error) throw result.error;
+
+      message('promotion-message', promotionId
+        ? 'تم تحديث الحملة بنجاح.'
+        : 'تمت إضافة الحملة بنجاح.');
+
+      resetPromotionForm();
       await loadPromotions();
 
     } catch (error) {
-      message('promotion-message', 'تعذر إضافة العرض: ' + error.message, true);
+      message('promotion-message', 'تعذر حفظ الحملة: ' + error.message, true);
     }
   });
 }
@@ -529,30 +576,63 @@ async function loadPromotions() {
     .order('sort_order', { ascending: true });
 
   if (error) {
-    box.textContent = 'تعذر تحميل العروض: ' + error.message;
+    box.textContent = 'تعذر تحميل الحملات: ' + error.message;
     return;
   }
 
   if (!data.length) {
-    box.textContent = 'لا توجد عروض حالياً.';
+    box.textContent = 'لا توجد حملات حالياً.';
     return;
   }
 
-  box.innerHTML = data.map(p => `
-    <article class="admin-product">
-      <img src="${esc(p.image_url)}" alt="">
-      <div>
-        <h3>${esc(p.title)}</h3>
-        <p>${p.is_active ? 'العرض مفعّل' : 'العرض متوقف'}</p>
-      </div>
-      <div class="admin-product-actions">
-        <button type="button" data-promo-toggle="${esc(p.id)}" data-active="${p.is_active}">
-          ${p.is_active ? 'إيقاف' : 'تفعيل'}
-        </button>
-        <button type="button" data-promo-delete="${esc(p.id)}">حذف</button>
-      </div>
-    </article>
-  `).join('');
+  box.innerHTML = data.map(p => {
+    const images = p.image_urls?.length ? p.image_urls : [p.image_url];
+
+    return `
+      <article class="admin-product">
+        <img src="${esc(images[0])}" alt="">
+        <div>
+          <h3>${esc(p.title)}</h3>
+          <p>${esc(p.discount_text || '')}</p>
+          <p>${images.length} صورة — ${p.is_active ? 'الحملة مفعّلة' : 'الحملة متوقفة'}</p>
+        </div>
+        <div class="admin-product-actions">
+          <button type="button" data-promo-edit="${esc(p.id)}">تعديل</button>
+          <button type="button" data-promo-toggle="${esc(p.id)}" data-active="${p.is_active}">
+            ${p.is_active ? 'إيقاف' : 'تفعيل'}
+          </button>
+          <button type="button" data-promo-delete="${esc(p.id)}">حذف</button>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  box.querySelectorAll('[data-promo-edit]').forEach(button => {
+    button.addEventListener('click', () => {
+      const p = data.find(item => item.id === button.dataset.promoEdit);
+      if (!p) return;
+
+      $('promotion-id').value = p.id;
+      $('promotion-title').value = p.title || '';
+      $('promotion-description').value = p.description || '';
+      $('promotion-discount').value = p.discount_text || '';
+      $('promotion-whatsapp').value = p.whatsapp_number || '9647744040441';
+      $('promotion-message-text').value = p.whatsapp_message || '';
+      $('promotion-cta').value = p.cta_text || 'اطلبي الآن عبر واتساب';
+      $('promotion-order').value = p.sort_order || 0;
+      $('promotion-active').checked = p.is_active;
+
+      currentPromotionImages = p.image_urls?.length
+        ? [...p.image_urls]
+        : (p.image_url ? [p.image_url] : []);
+
+      $('promotion-images').value = '';
+      showPromotionImages(currentPromotionImages);
+
+      message('promotion-message', 'أنت الآن تعدّل هذه الحملة. الصور الجديدة ستُضاف إلى الصور الحالية.');
+      promotionForm.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
 
   box.querySelectorAll('[data-promo-toggle]').forEach(button => {
     button.addEventListener('click', async () => {
@@ -561,7 +641,7 @@ async function loadPromotions() {
         .eq('id', button.dataset.promoToggle);
 
       if (error) {
-        alert('تعذر تغيير حالة العرض: ' + error.message);
+        alert('تعذر تغيير حالة الحملة: ' + error.message);
         return;
       }
 
@@ -571,16 +651,21 @@ async function loadPromotions() {
 
   box.querySelectorAll('[data-promo-delete]').forEach(button => {
     button.addEventListener('click', async () => {
-      if (!confirm('هل تريد حذف هذا العرض؟')) return;
+      if (!confirm('هل تريد حذف هذه الحملة؟')) return;
 
       const { error } = await db.from('promotions')
         .delete()
         .eq('id', button.dataset.promoDelete);
 
       if (error) {
-        alert('تعذر حذف العرض: ' + error.message);
+        alert('تعذر حذف الحملة: ' + error.message);
         return;
       }
+
+      await loadPromotions();
+    });
+  });
+}
 
       await loadPromotions();
     });
