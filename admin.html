@@ -1,5 +1,53 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#493027"><title>إدارة المتجر | LA Vine</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="admin.css"></head><body class="admin-page"><header class="admin-header"><a class="brand" href="index.html"><span class="brand-mark">LA</span><span>LA VINE<small>FASHION</small></span></a><span>لوحة إدارة المتجر</span><a href="index.html">عرض المتجر</a></header><main class="admin-wrap"><section id="login-panel" class="admin-panel login-panel"><p class="eyebrow">LA VINE FASHION</p><h1>تسجيل دخول المدير</h1><p>هذه الصفحة مخصصة لإدارة منتجات المتجر.</p><form id="login-form"><label>البريد الإلكتروني<input id="email" type="email" value="Ahmedalazawie5@gmail.com" required autocomplete="username"></label><label>كلمة المرور<input id="password" type="password" required autocomplete="current-password"></label><button class="admin-btn" type="submit">تسجيل الدخول</button><p id="login-message" class="form-message" role="status"></p></form></section>
-<section id="dashboard" class="admin-panel" hidden><div class="dash-heading"><div><p class="eyebrow">إدارة التشكيلة</p><h1>منتجات LA Vine</h1></div><button id="logout" class="secondary-btn">تسجيل الخروج</button></div><form id="product-form" class="product-form"><input id="product-id" type="hidden"><div class="form-grid"><label>اسم المنتج *<input id="name" required maxlength="120"></label><label>السعر بالدينار العراقي *<input id="price" type="number" min="0" step="1" required></label><label>التصنيف<input id="category" placeholder="بجامات، أطقم، ملابس منزلية"></label><div class="full-width">
+<section id="dashboard" class="admin-panel" hidden><div class="dash-heading"><div><p class="eyebrow">إدارة التشكيلة</p><h1>منتجات LA Vine</h1></div><button id="logout" class="secondary-btn">تسجيل الخروج</button>
+</div>
+
+<!-- إدارة العروض المتحركة -->
+<section class="admin-panel promotion-admin">
+  <h2>إدارة العروض المتحركة</h2>
+  <p>إضافة وتعديل صور العروض التي تظهر في بداية المتجر.</p>
+
+  <form id="promotion-form">
+    <label>
+      عنوان العرض
+      <input id="promotion-title" type="text" required>
+    </label>
+
+    <label>
+      وصف العرض
+      <input id="promotion-description" type="text">
+    </label>
+
+    <label>
+      صورة العرض (JPG)
+      <input id="promotion-image" type="file" accept="image/jpeg" required>
+    </label>
+
+    <label>
+      رابط عند الضغط على الصورة (اختياري)
+      <input id="promotion-link" type="text" placeholder="مثلاً رابط منتج">
+    </label>
+
+    <label>
+      ترتيب العرض
+      <input id="promotion-order" type="number" value="0">
+    </label>
+
+    <label class="checkbox-label">
+      <input id="promotion-active" type="checkbox" checked>
+      العرض مفعّل
+    </label>
+
+    <button type="submit" class="admin-btn">إضافة العرض</button>
+    <p id="promotion-message" class="form-message"></p>
+  </form>
+
+  <h3>العروض الحالية</h3>
+  <div id="admin-promotions">جارٍ تحميل العروض...</div>
+</section>
+
+<form id="product-form" class="product-form">
+<input id="product-id" type="hidden"><div class="form-grid"><label>اسم المنتج *<input id="name" required maxlength="120"></label><label>السعر بالدينار العراقي *<input id="price" type="number" min="0" step="1" required></label><label>التصنيف<input id="category" placeholder="بجامات، أطقم، ملابس منزلية"></label><div class="full-width">
 <h3>ألوان المنتج ومخزونها</h3>
 <div id="colors-container"></div>
 <button type="button" id="add-color" class="secondary-btn">+ إضافة لون جديد</button>
