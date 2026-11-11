@@ -1,1 +1,436 @@
-.admin-page{min-height:100vh;background:#f7f1e9}.admin-header{height:76px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;background:#493027;color:#f8eee1}.admin-header .brand{color:#f8eee1}.admin-header .brand-mark{color:#d3b48b;border-color:#d3b48b}.admin-header>a:last-child{color:#e6cda9;text-decoration:none;font-size:13px}.admin-wrap{max-width:1050px;margin:42px auto;padding:0 18px}.admin-panel{background:#fff;border:1px solid #eadfd3;padding:30px;border-radius:8px;box-shadow:0 10px 35px #4930270c}.login-panel{max-width:470px;margin:8vh auto}.admin-panel h1{color:#493027;margin:5px 0 10px}.admin-panel p{color:#806e62}.admin-panel label{display:flex;flex-direction:column;gap:7px;color:#5c493e;font-size:13px}.admin-panel input,.admin-panel textarea{width:100%;padding:12px;border:1px solid #dfd2c4;border-radius:4px;font:inherit;background:#fff;color:#382820}.login-panel form{display:grid;gap:17px;margin-top:25px}.admin-btn,.secondary-btn{border:0;padding:12px 22px;border-radius:4px;font:inherit;cursor:pointer}.admin-btn{background:#493027;color:#fff}.secondary-btn{background:#eee5dc;color:#604b3d}.form-message{font-size:13px;margin:0}.dash-heading,.form-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.product-form{margin-top:25px;padding:22px;background:#fbf8f3;border:1px solid #eee4d9}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.form-grid .full-width{grid-column:1/-1}.checkbox-label{flex-direction:row!important;align-items:center}.checkbox-label input{width:auto}.form-actions{justify-content:flex-start;margin-top:18px}.list-title{font-size:21px;color:#493027;margin-top:35px}.admin-products{display:grid;gap:12px}.admin-product{display:grid;grid-template-columns:90px 1fr auto;gap:15px;align-items:center;padding:12px;border:1px solid #eadfd3;background:white}.admin-product img,.admin-placeholder{width:90px;height:100px;object-fit:cover;background:#eee4d9;display:grid;place-items:center}.admin-product h3{margin:0;color:#493027}.admin-product p{margin:4px 0;font-size:12px}.admin-product-actions{display:flex;gap:7px;flex-wrap:wrap}.admin-product-actions button{padding:8px 12px;border:0;cursor:pointer;font:inherit}.edit-product{background:#eee5dc;color:#493027}.delete-product{background:#f5e5e1;color:#9b3f2e}@media(max-width:650px){.admin-header{padding:0 15px}.admin-header>span{font-size:12px}.admin-wrap{margin:20px auto}.admin-panel{padding:18px}.form-grid{grid-template-columns:1fr}.form-grid .full-width{grid-column:auto}.admin-product{grid-template-columns:65px 1fr}.admin-product img,.admin-placeholder{width:65px;height:80px}.admin-product-actions{grid-column:1/-1}.dash-heading{align-items:flex-start}}
+
+/* =================================
+   LA VINE FASHION - ADMIN DASHBOARD
+================================= */
+
+:root {
+  --admin-brown: #493027;
+  --admin-brown-light: #76513d;
+  --admin-gold: #b08a55;
+  --admin-gold-light: #d8bd91;
+  --admin-cream: #f8f5ef;
+  --admin-white: #ffffff;
+  --admin-text: #382820;
+  --admin-muted: #8b796b;
+  --admin-border: #eadfd3;
+  --admin-shadow: 0 12px 35px rgba(73,48,39,.07);
+}
+
+.admin-page {
+  min-height: 100vh;
+  background: var(--admin-cream);
+  color: var(--admin-text);
+  font-family: 'Cairo', sans-serif;
+}
+
+/* Header */
+
+.admin-header {
+  min-height: 78px;
+  padding: 12px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background: linear-gradient(120deg,#38231d,#604334);
+  color: #fff8ed;
+  box-shadow: 0 4px 20px rgba(40,25,18,.16);
+}
+
+.admin-header .brand {
+  color: #fff8ed;
+}
+
+.admin-header .brand-mark {
+  color: var(--admin-gold-light);
+  border-color: var(--admin-gold-light);
+}
+
+.admin-header > span {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.admin-header > a:last-child {
+  color: var(--admin-gold-light);
+  text-decoration: none;
+  font-size: 13px;
+  transition: .2s;
+}
+
+.admin-header > a:last-child:hover {
+  color: white;
+}
+
+/* Main Layout */
+
+.admin-wrap {
+  max-width: 1250px;
+  margin: 38px auto;
+  padding: 0 22px 50px;
+}
+
+.admin-panel {
+  background: var(--admin-white);
+  border: 1px solid var(--admin-border);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: var(--admin-shadow);
+}
+
+.admin-panel h1 {
+  color: var(--admin-brown);
+  font-size: 27px;
+  font-weight: 800;
+  margin: 5px 0 10px;
+}
+
+.admin-panel h2 {
+  color: var(--admin-brown);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.admin-panel h3 {
+  color: var(--admin-brown);
+}
+
+.admin-panel p {
+  color: var(--admin-muted);
+  line-height: 1.8;
+}
+
+/* Login */
+
+.login-panel {
+  max-width: 470px;
+  margin: 9vh auto;
+  padding: 38px;
+  border-top: 4px solid var(--admin-gold);
+}
+
+.login-panel form {
+  display: grid;
+  gap: 19px;
+  margin-top: 28px;
+}
+
+/* Forms */
+
+.admin-panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--admin-brown);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-panel input,
+.admin-panel textarea {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid #e3d7c9;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 14px;
+  background: #fdfbf8;
+  color: var(--admin-text);
+  outline: none;
+  transition: .2s;
+}
+
+.admin-panel input:focus,
+.admin-panel textarea:focus {
+  border-color: var(--admin-gold);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(176,138,85,.12);
+}
+
+.admin-panel input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--admin-brown);
+}
+
+.admin-panel input[type="file"] {
+  padding: 10px;
+  background: #f8f5ef;
+}
+
+.admin-panel textarea {
+  resize: vertical;
+}
+
+/* Buttons */
+
+.admin-btn,
+.secondary-btn {
+  border: 0;
+  padding: 12px 23px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.admin-btn {
+  background: linear-gradient(120deg,#493027,#76513d);
+  color: white;
+  box-shadow: 0 5px 14px rgba(73,48,39,.15);
+}
+
+.admin-btn:hover {
+  background: linear-gradient(120deg,#76513d,#493027);
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  background: #f0e7dc;
+  color: var(--admin-brown);
+}
+
+.secondary-btn:hover {
+  background: #e5d6c4;
+}
+
+.form-message {
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+/* Dashboard Heading */
+
+.dash-heading,
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.dash-heading {
+  margin-bottom: 25px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+/* Product Form */
+
+.product-form {
+  margin-top: 28px;
+  padding: 25px;
+  background: #fbf8f3;
+  border: 1px solid var(--admin-border);
+  border-radius: 13px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 18px;
+}
+
+.form-grid .full-width {
+  grid-column: 1/-1;
+}
+
+.checkbox-label {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px !important;
+}
+
+.form-actions {
+  justify-content: flex-start;
+  margin-top: 22px;
+}
+
+/* Lists */
+
+.list-title {
+  font-size: 22px;
+  color: var(--admin-brown);
+  margin: 38px 0 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-products {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-product {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid var(--admin-border);
+  background: white;
+  border-radius: 12px;
+  transition: .2s;
+}
+
+.admin-product:hover {
+  border-color: var(--admin-gold-light);
+  box-shadow: 0 7px 20px rgba(73,48,39,.06);
+}
+
+.admin-product img,
+.admin-placeholder {
+  width: 100px;
+  height: 110px;
+  object-fit: cover;
+  background: #f2ece3;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+}
+
+.admin-product h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.admin-product p {
+  margin: 5px 0;
+  font-size: 12px;
+}
+
+.admin-product-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-product-actions button {
+  padding: 9px 13px;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  background: #f0e7dc;
+  color: var(--admin-brown);
+  transition: .2s;
+}
+
+.admin-product-actions button:hover {
+  background: var(--admin-gold-light);
+  color: var(--admin-brown);
+}
+
+.admin-product-actions .edit-product {
+  background: #eee5dc;
+  color: var(--admin-brown);
+}
+
+.admin-product-actions .delete-product {
+  background: #f8e8e4;
+  color: #9b3f2e;
+}
+
+/* Promotions */
+
+.promotion-admin {
+  margin-top: 25px;
+  border-top: 3px solid var(--admin-gold);
+}
+
+.promotion-admin form {
+  display: grid;
+  gap: 17px;
+  margin-top: 22px;
+}
+
+#promotion-images-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#promotion-images-preview img {
+  border: 2px solid var(--admin-border);
+}
+
+/* Responsive */
+
+@media(max-width:750px) {
+  .admin-wrap {
+    margin: 22px auto;
+    padding: 0 13px 35px;
+  }
+
+  .admin-panel {
+    padding: 20px;
+  }
+
+  .admin-header {
+    padding: 12px 15px;
+    min-height: 68px;
+  }
+
+  .admin-header > span {
+    font-size: 11px;
+  }
+
+  .admin-header > a:last-child {
+    font-size: 11px;
+  }
+
+  .admin-panel h1 {
+    font-size: 22px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid .full-width {
+    grid-column: auto;
+  }
+
+  .admin-product {
+    grid-template-columns: 75px 1fr;
+    gap: 12px;
+  }
+
+  .admin-product img,
+  .admin-placeholder {
+    width: 75px;
+    height: 85px;
+  }
+
+  .admin-product-actions {
+    grid-column: 1/-1;
+  }
+
+  .dash-heading {
+    align-items: flex-start;
+  }
+
+  .login-panel {
+    margin: 6vh auto;
+    padding: 24px;
+  }
+}
+
+@media(max-width:400px) {
+  .admin-product-actions button {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .admin-header .brand {
+    transform: scale(.9);
+    transform-origin: right center;
+  }
+}
