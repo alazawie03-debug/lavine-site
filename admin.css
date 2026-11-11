@@ -434,3 +434,297 @@
     transform-origin: right center;
   }
 }
+
+
+/* =================================
+   LA VINE - PROFESSIONAL SIDEBAR
+================================= */
+
+.admin-layout {
+  display: grid;
+  grid-template-columns: 245px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  direction: rtl;
+}
+
+.admin-sidebar {
+  background: linear-gradient(160deg, #493027, #302019);
+  color: #fff8ed;
+  padding: 22px 14px;
+  border-radius: 16px;
+  min-height: 570px;
+  position: sticky;
+  top: 18px;
+  box-shadow: 0 12px 30px rgba(49,31,22,.13);
+}
+
+.sidebar-heading {
+  color: #c5a77d;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 12px 12px 8px;
+}
+
+.sidebar-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 12px;
+  margin: 4px 0;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #f7eadb;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.sidebar-link > span {
+  width: 23px;
+  font-size: 19px;
+  text-align: center;
+  color: #d5b889;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  background: rgba(216,189,145,.17);
+  color: #fff;
+}
+
+.sidebar-link.active {
+  border-right: 3px solid #d8bd91;
+}
+
+.sidebar-link small {
+  margin-right: auto;
+  color: #d8bd91;
+  font-size: 9px;
+}
+
+.sidebar-footer {
+  margin-top: 55px;
+  padding: 18px 12px 5px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  color: #d8bd91;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.sidebar-footer small {
+  display: block;
+  margin-top: 5px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #c5b2a0;
+}
+
+.admin-content {
+  min-width: 0;
+}
+
+.admin-section {
+  background: #fff;
+  border: 1px solid var(--admin-border);
+  border-radius: 15px;
+  padding: 26px;
+  box-shadow: var(--admin-shadow);
+}
+
+.admin-section[hidden] {
+  display: none !important;
+}
+
+.section-heading {
+  margin-bottom: 25px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.section-heading h2 {
+  font-size: 24px;
+  margin: 5px 0;
+}
+
+.section-title {
+  margin: 28px 0 16px;
+  color: var(--admin-brown);
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.welcome-card {
+  position: relative;
+  overflow: hidden;
+  padding: 35px 30px;
+  border-radius: 14px;
+  background: linear-gradient(120deg,#493027,#76513d);
+  color: #fff8ed;
+}
+
+.welcome-card::after {
+  content: "LA";
+  position: absolute;
+  left: 25px;
+  top: -28px;
+  font-family: Georgia,serif;
+  font-size: 150px;
+  color: rgba(255,255,255,.06);
+  pointer-events: none;
+}
+
+.welcome-card p {
+  color: #d8bd91;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.welcome-card h2 {
+  color: white;
+  font-size: 25px;
+  margin: 8px 0;
+}
+
+.welcome-card span {
+  color: #f0dfcb;
+  font-size: 13px;
+}
+
+.dashboard-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 15px;
+}
+
+.shortcut-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--admin-brown);
+  font: inherit;
+  text-align: right;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.shortcut-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--admin-gold);
+  box-shadow: var(--admin-shadow);
+}
+
+.shortcut-icon {
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 11px;
+  background: #f4ebdf;
+  color: var(--admin-gold);
+  font-size: 24px;
+}
+
+.shortcut-card strong {
+  font-size: 16px;
+}
+
+.shortcut-card small {
+  color: var(--admin-muted);
+  font-size: 11px;
+}
+
+.shortcut-action {
+  margin-top: 8px;
+  color: var(--admin-gold);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.coming-soon-card {
+  margin-top: 22px;
+  padding: 22px;
+  background: #fbf8f3;
+  border: 1px dashed #d9c6ae;
+  border-radius: 12px;
+}
+
+.coming-soon-card h2,
+.coming-soon-card h3 {
+  color: var(--admin-brown);
+  margin-top: 0;
+}
+
+.coming-soon-card p {
+  font-size: 13px;
+}
+
+/* Responsive sidebar */
+
+@media(max-width:850px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .admin-sidebar {
+    min-height: auto;
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 12px;
+  }
+
+  .sidebar-heading,
+  .sidebar-footer {
+    display: none;
+  }
+
+  .sidebar-link {
+    width: auto;
+    flex: 1 1 125px;
+    justify-content: center;
+    padding: 11px 8px;
+    font-size: 11px;
+  }
+
+  .sidebar-link.active {
+    border-right: 0;
+    border-bottom: 2px solid #d8bd91;
+  }
+
+  .dashboard-shortcuts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media(max-width:500px) {
+  .admin-section {
+    padding: 17px;
+  }
+
+  .welcome-card {
+    padding: 25px 18px;
+  }
+
+  .welcome-card h2 {
+    font-size: 20px;
+  }
+
+  .sidebar-link {
+    flex: 1 1 100px;
+    font-size: 10px;
+  }
+}
