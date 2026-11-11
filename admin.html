@@ -1,68 +1,380 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#493027"><title>إدارة المتجر | LA Vine</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="admin.css"></head><body class="admin-page"><header class="admin-header"><a class="brand" href="index.html"><span class="brand-mark">LA</span><span>LA VINE<small>FASHION</small></span></a><span>لوحة إدارة المتجر</span><a href="index.html">عرض المتجر</a></header><main class="admin-wrap"><section id="login-panel" class="admin-panel login-panel"><p class="eyebrow">LA VINE FASHION</p><h1>تسجيل دخول المدير</h1><p>هذه الصفحة مخصصة لإدارة منتجات المتجر.</p><form id="login-form"><label>البريد الإلكتروني<input id="email" type="email" value="Ahmedalazawie5@gmail.com" required autocomplete="username"></label><label>كلمة المرور<input id="password" type="password" required autocomplete="current-password"></label><button class="admin-btn" type="submit">تسجيل الدخول</button><p id="login-message" class="form-message" role="status"></p></form></section>
-<section id="dashboard" class="admin-panel" hidden><div class="dash-heading"><div><p class="eyebrow">إدارة التشكيلة</p><h1>منتجات LA Vine</h1></div><button id="logout" class="secondary-btn">تسجيل الخروج</button>
-</div>
 
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#493027">
+  <title>لوحة الإدارة | LA Vine Fashion</title>
 
-<!-- إدارة العروض -->
-<section class="admin-panel promotion-admin" id="promotions-tab">
-  <h2>إدارة الحملات والعروض</h2>
-  <p>إضافة حملات متعددة الصور مع الخصومات والطلب عبر واتساب.</p>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <form id="promotion-form">
-    <input id="promotion-id" type="hidden">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
 
-    <label>عنوان الحملة
-      <input id="promotion-title" type="text" required>
-    </label>
+<body class="admin-page">
 
-    <label>وصف الحملة
-      <textarea id="promotion-description" rows="2"></textarea>
-    </label>
+<header class="admin-header">
+  <a class="brand" href="index.html">
+    <span class="brand-mark">LA</span>
+    <span>LA VINE<small>FASHION</small></span>
+  </a>
 
-    <label>نص الخصم
-      <input id="promotion-discount" type="text" placeholder="مثلاً خصم 30%">
-    </label>
+  <span>نظام إدارة المتجر</span>
 
-    <label>صور الحملة (يمكن اختيار أكثر من صورة JPG)
-      <input id="promotion-images" type="file" accept="image/jpeg" multiple>
-    </label>
+  <a href="index.html">عرض المتجر ↗</a>
+</header>
 
-    <label>رقم واتساب
-      <input id="promotion-whatsapp" type="text" value="9647744040441">
-    </label>
+<main class="admin-wrap">
 
-    <label>رسالة واتساب
-      <textarea id="promotion-message-text" rows="2" placeholder="مرحباً، أريد الاستفسار عن العرض"></textarea>
-    </label>
+  <!-- تسجيل الدخول -->
+  <section id="login-panel" class="admin-panel login-panel">
+    <p class="eyebrow">LA VINE FASHION</p>
+    <h1>مرحباً بك مجدداً</h1>
+    <p>سجّل الدخول للوصول إلى لوحة إدارة المتجر.</p>
 
-    <label>نص زر الطلب
-      <input id="promotion-cta" type="text" value="اطلبي الآن عبر واتساب">
-    </label>
+    <form id="login-form">
+      <label>
+        البريد الإلكتروني
+        <input id="email" type="email"
+          value="Ahmedalazawie5@gmail.com"
+          required autocomplete="username">
+      </label>
 
-    <label>ترتيب الحملة
-      <input id="promotion-order" type="number" value="0">
-    </label>
+      <label>
+        كلمة المرور
+        <input id="password" type="password"
+          required autocomplete="current-password">
+      </label>
 
-    <label class="checkbox-label">
-      <input id="promotion-active" type="checkbox" checked>
-      الحملة مفعّلة
-    </label>
+      <button class="admin-btn" type="submit">
+        تسجيل الدخول
+      </button>
 
-    <button type="submit" class="admin-btn">حفظ الحملة</button>
-    <button type="button" id="promotion-reset" class="secondary-btn">حملة جديدة</button>
+      <p id="login-message" class="form-message" role="status"></p>
+    </form>
+  </section>
 
-    <p id="promotion-message" class="form-message"></p>
-    <div id="promotion-images-preview"></div>
-  </form>
+  <!-- لوحة الإدارة -->
+  <section id="dashboard" hidden>
 
-  <h3>الحملات الحالية</h3>
-  <div id="admin-promotions">جارٍ تحميل الحملات...</div>
-</section>
+    <div class="dash-heading">
+      <div>
+        <p class="eyebrow">LA VINE MANAGEMENT</p>
+        <h1>لوحة التحكم</h1>
+        <p>إدارة متجرك ومتابعة منتجاتك وحملاتك التسويقية.</p>
+      </div>
 
+      <button id="logout" class="secondary-btn">
+        تسجيل الخروج
+      </button>
+    </div>
 
-<form id="product-form" class="product-form">
-<input id="product-id" type="hidden"><div class="form-grid"><label>اسم المنتج *<input id="name" required maxlength="120"></label><label>السعر بالدينار العراقي *<input id="price" type="number" min="0" step="1" required></label><label>التصنيف<input id="category" placeholder="بجامات، أطقم، ملابس منزلية"></label><div class="full-width">
-<h3>ألوان المنتج ومخزونها</h3>
-<div id="colors-container"></div>
-<button type="button" id="add-color" class="secondary-btn">+ إضافة لون جديد</button>
-</div><label>صورة المنتج<input id="image" type="file" accept="image/jpeg" ></label><label class="full-width">الوصف<textarea id="description" rows="3"></textarea></label><label class="checkbox-label"><input id="active" type="checkbox" checked> المنتج متاح للعرض</label></div><div class="form-actions"><button class="admin-btn" type="submit">حفظ المنتج</button><button class="secondary-btn" id="reset-form" type="button">تفريغ الحقول</button><span id="form-message" class="form-message" role="status"></span></div></form><h2 class="list-title">المنتجات الحالية</h2><div id="admin-products" class="admin-products">جارٍ التحميل...</div></section></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="admin.js?v=3"></script></body></html>
+    <div class="admin-layout">
+
+      <!-- القائمة الجانبية -->
+      <aside class="admin-sidebar">
+        <div class="sidebar-heading">القائمة الرئيسية</div>
+
+        <button type="button" class="sidebar-link active"
+          data-section="home-tab">
+          <span>⌂</span> الرئيسية
+        </button>
+
+        <button type="button" class="sidebar-link"
+          data-section="products-tab">
+          <span>▦</span> المنتجات
+        </button>
+
+        <button type="button" class="sidebar-link"
+          data-section="promotions-tab">
+          <span>◇</span> الحملات والعروض
+        </button>
+
+        <div class="sidebar-heading">المتجر</div>
+
+        <button type="button" class="sidebar-link"
+          data-section="orders-tab">
+          <span>▤</span> الطلبات
+          <small>قريباً</small>
+        </button>
+
+        <button type="button" class="sidebar-link"
+          data-section="customers-tab">
+          <span>♙</span> العملاء
+          <small>قريباً</small>
+        </button>
+
+        <button type="button" class="sidebar-link"
+          data-section="settings-tab">
+          <span>⚙</span> إعدادات المتجر
+          <small>قريباً</small>
+        </button>
+
+        <div class="sidebar-footer">
+          <span>LA VINE</span>
+          <small>FASHION ADMIN PANEL</small>
+        </div>
+      </aside>
+
+      <!-- محتوى اللوحة -->
+      <div class="admin-content">
+
+        <!-- الرئيسية -->
+        <section id="home-tab" class="admin-section">
+          <div class="welcome-card">
+            <p>WELCOME TO LA VINE</p>
+            <h2>أهلاً بك في إدارة متجرك</h2>
+            <span>من هنا يمكنك التحكم بمنتجاتك وحملاتك التسويقية.</span>
+          </div>
+
+          <h2 class="section-title">إدارة المتجر</h2>
+
+          <div class="dashboard-shortcuts">
+
+            <button type="button" class="shortcut-card"
+              data-section="products-tab">
+              <span class="shortcut-icon">▦</span>
+              <strong>المنتجات</strong>
+              <small>إضافة وتعديل المنتجات والمخزون</small>
+              <span class="shortcut-action">إدارة المنتجات ←</span>
+            </button>
+
+            <button type="button" class="shortcut-card"
+              data-section="promotions-tab">
+              <span class="shortcut-icon">◇</span>
+              <strong>الحملات والعروض</strong>
+              <small>إدارة الصور والخصومات وواتساب</small>
+              <span class="shortcut-action">إدارة الحملات ←</span>
+            </button>
+
+          </div>
+
+          <div class="coming-soon-card">
+            <h3>المراحل القادمة</h3>
+            <p>سيتم تجهيز إدارة الطلبات والعملاء وإعدادات المتجر في المراحل القادمة.</p>
+          </div>
+        </section>
+
+        <!-- المنتجات -->
+        <section id="products-tab" class="admin-section" hidden>
+
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">PRODUCT MANAGEMENT</p>
+              <h2>إدارة المنتجات</h2>
+              <p>إضافة المنتجات وتحديث الأسعار والألوان والمخزون.</p>
+            </div>
+          </div>
+
+          <form id="product-form" class="product-form">
+
+            <input id="product-id" type="hidden">
+
+            <div class="form-grid">
+
+              <label>
+                اسم المنتج *
+                <input id="name" required maxlength="120">
+              </label>
+
+              <label>
+                السعر بالدينار العراقي *
+                <input id="price" type="number"
+                  min="0" step="1" required>
+              </label>
+
+              <label>
+                التصنيف
+                <input id="category"
+                  placeholder="بجامات، أطقم، ملابس منزلية">
+              </label>
+
+              <div class="full-width">
+                <h3>ألوان المنتج ومخزونها</h3>
+                <div id="colors-container"></div>
+
+                <button type="button" id="add-color"
+                  class="secondary-btn">
+                  + إضافة لون جديد
+                </button>
+              </div>
+
+              <label>
+                صورة المنتج
+                <input id="image" type="file" accept="image/jpeg">
+              </label>
+
+              <label class="full-width">
+                الوصف
+                <textarea id="description" rows="3"></textarea>
+              </label>
+
+              <label class="checkbox-label">
+                <input id="active" type="checkbox" checked>
+                المنتج متاح للعرض
+              </label>
+
+            </div>
+
+            <div class="form-actions">
+              <button class="admin-btn" type="submit">
+                حفظ المنتج
+              </button>
+
+              <button class="secondary-btn"
+                id="reset-form" type="button">
+                تفريغ الحقول
+              </button>
+
+              <span id="form-message"
+                class="form-message" role="status"></span>
+            </div>
+
+          </form>
+
+          <h2 class="list-title">المنتجات الحالية</h2>
+          <div id="admin-products" class="admin-products">
+            جارٍ تحميل المنتجات...
+          </div>
+
+        </section>
+
+        <!-- الحملات والعروض -->
+        <section id="promotions-tab"
+          class="admin-section promotion-admin" hidden>
+
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">CAMPAIGN MANAGEMENT</p>
+              <h2>الحملات والعروض</h2>
+              <p>إدارة الحملات والصور والخصومات والطلب عبر واتساب.</p>
+            </div>
+          </div>
+
+          <form id="promotion-form">
+
+            <input id="promotion-id" type="hidden">
+
+            <label>
+              عنوان الحملة
+              <input id="promotion-title" type="text" required>
+            </label>
+
+            <label>
+              وصف الحملة
+              <textarea id="promotion-description" rows="2"></textarea>
+            </label>
+
+            <label>
+              نص الخصم
+              <input id="promotion-discount"
+                type="text" placeholder="مثلاً خصم 30%">
+            </label>
+
+            <label>
+              صور الحملة (يمكن اختيار أكثر من صورة JPG)
+              <input id="promotion-images"
+                type="file" accept="image/jpeg" multiple>
+            </label>
+
+            <label>
+              رقم واتساب
+              <input id="promotion-whatsapp"
+                type="text" value="9647744040441">
+            </label>
+
+            <label>
+              رسالة واتساب
+              <textarea id="promotion-message-text" rows="2"
+                placeholder="مرحباً، أريد الاستفسار عن العرض"></textarea>
+            </label>
+
+            <label>
+              نص زر الطلب
+              <input id="promotion-cta"
+                type="text" value="اطلبي الآن عبر واتساب">
+            </label>
+
+            <label>
+              ترتيب الحملة
+              <input id="promotion-order" type="number" value="0">
+            </label>
+
+            <label class="checkbox-label">
+              <input id="promotion-active" type="checkbox" checked>
+              الحملة مفعّلة
+            </label>
+
+            <button type="submit" class="admin-btn">
+              حفظ الحملة
+            </button>
+
+            <button type="button" id="promotion-reset"
+              class="secondary-btn">
+              حملة جديدة
+            </button>
+
+            <p id="promotion-message" class="form-message"></p>
+            <div id="promotion-images-preview"></div>
+
+          </form>
+
+          <h3>الحملات الحالية</h3>
+          <div id="admin-promotions">
+            جارٍ تحميل الحملات...
+          </div>
+
+        </section>
+
+        <!-- أقسام قيد التجهيز -->
+        <section id="orders-tab" class="admin-section coming-soon-card" hidden>
+          <h2>إدارة الطلبات</h2>
+          <p>سيتم تجهيز هذا القسم وربطه بنظام الطلبات لاحقاً.</p>
+        </section>
+
+        <section id="customers-tab" class="admin-section coming-soon-card" hidden>
+          <h2>إدارة العملاء</h2>
+          <p>سيتم تجهيز هذا القسم وربطه ببيانات العملاء لاحقاً.</p>
+        </section>
+
+        <section id="settings-tab" class="admin-section coming-soon-card" hidden>
+          <h2>إعدادات المتجر</h2>
+          <p>سيتم تجهيز إعدادات التواصل والشحن لاحقاً.</p>
+        </section>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="admin.js?v=3"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('[data-section]');
+    const sections = document.querySelectorAll('.admin-section');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.section;
+
+        sections.forEach(section => {
+          section.hidden = section.id !== target;
+        });
+
+        buttons.forEach(item => {
+          item.classList.toggle('active', item === button);
+        });
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
