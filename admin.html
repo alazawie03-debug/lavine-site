@@ -21,9 +21,7 @@
     <span class="brand-mark">LA</span>
     <span>LA VINE<small>FASHION</small></span>
   </a>
-
   <span>نظام إدارة المتجر</span>
-
   <a href="index.html">عرض المتجر ↗</a>
 </header>
 
@@ -76,6 +74,7 @@
 
       <!-- القائمة الجانبية -->
       <aside class="admin-sidebar">
+
         <div class="sidebar-heading">القائمة الرئيسية</div>
 
         <button type="button" class="sidebar-link active"
@@ -117,6 +116,7 @@
           <span>LA VINE</span>
           <small>FASHION ADMIN PANEL</small>
         </div>
+
       </aside>
 
       <!-- محتوى اللوحة -->
@@ -124,6 +124,7 @@
 
         <!-- الرئيسية -->
         <section id="home-tab" class="admin-section">
+
           <div class="welcome-card">
             <p>WELCOME TO LA VINE</p>
             <h2>أهلاً بك في إدارة متجرك</h2>
@@ -156,6 +157,7 @@
             <h3>المراحل القادمة</h3>
             <p>سيتم تجهيز إدارة الطلبات والعملاء وإعدادات المتجر في المراحل القادمة.</p>
           </div>
+
         </section>
 
         <!-- المنتجات -->
@@ -254,93 +256,155 @@
             </div>
           </div>
 
-          <form id="promotion-form">
+          <form id="promotion-form" class="promotion-form">
 
             <input id="promotion-id" type="hidden">
 
-            <label>
-              عنوان الحملة
-              <input id="promotion-title" type="text" required>
-            </label>
+            <!-- معلومات الحملة -->
+            <div class="promotion-form-header">
+              <div>
+                <span class="promotion-step">01 / CAMPAIGN DETAILS</span>
+                <h3>معلومات الحملة</h3>
+                <p>أدخل عنوان الحملة والتفاصيل التي ستظهر للزوار.</p>
+              </div>
+              <span class="promotion-header-icon">◇</span>
+            </div>
 
-            <label>
-              وصف الحملة
-              <textarea id="promotion-description" rows="2"></textarea>
-            </label>
+            <div class="promotion-fields">
 
-            <label>
-              نص الخصم
-              <input id="promotion-discount"
-                type="text" placeholder="مثلاً خصم 30%">
-            </label>
+              <label class="promotion-field">
+                <span>عنوان الحملة <b>*</b></span>
+                <input id="promotion-title" type="text"
+                  placeholder="مثلاً: عروض الموسم الشتوي" required>
+              </label>
 
-            <label>
-              صور الحملة (يمكن اختيار أكثر من صورة JPG)
-              <input id="promotion-images"
-                type="file" accept="image/jpeg" multiple>
-            </label>
+              <label class="promotion-field">
+                <span>وصف الحملة</span>
+                <textarea id="promotion-description" rows="3"
+                  placeholder="اكتب وصفاً مختصراً وجذاباً للحملة"></textarea>
+              </label>
 
-            <label>
-              رقم واتساب
-              <input id="promotion-whatsapp"
-                type="text" value="9647744040441">
-            </label>
+              <label class="promotion-field">
+                <span>نص الخصم</span>
+                <input id="promotion-discount" type="text"
+                  placeholder="مثلاً: خصم 30%">
+              </label>
 
-            <label>
-              رسالة واتساب
-              <textarea id="promotion-message-text" rows="2"
-                placeholder="مرحباً، أريد الاستفسار عن العرض"></textarea>
-            </label>
+              <!-- رفع الصور -->
+              <div class="promotion-field promotion-upload-field">
+                <span>صور الحملة</span>
 
-            <label>
-              نص زر الطلب
-              <input id="promotion-cta"
-                type="text" value="اطلبي الآن عبر واتساب">
-            </label>
+                <label class="promotion-upload" for="promotion-images">
+                  <span class="promotion-upload-icon">＋</span>
+                  <strong>اضغط لاختيار صور الحملة</strong>
+                  <small>يمكنك اختيار أكثر من صورة بصيغة JPG</small>
+                  <input id="promotion-images" type="file"
+                    accept="image/jpeg" multiple>
+                </label>
 
-            <label>
-              ترتيب الحملة
-              <input id="promotion-order" type="number" value="0">
-            </label>
+                <div id="promotion-images-preview"
+                  class="promotion-images-preview"></div>
+              </div>
 
-            <label class="checkbox-label">
-              <input id="promotion-active" type="checkbox" checked>
-              الحملة مفعّلة
-            </label>
+            </div>
 
-            <button type="submit" class="admin-btn">
-              حفظ الحملة
-            </button>
+            <!-- إعدادات الطلب -->
+            <div class="promotion-form-header promotion-subheader">
+              <div>
+                <span class="promotion-step">02 / ORDER SETTINGS</span>
+                <h3>إعدادات الطلب والتواصل</h3>
+                <p>خصص طريقة تواصل الزبون مع المتجر.</p>
+              </div>
+              <span class="promotion-header-icon">✧</span>
+            </div>
 
-            <button type="button" id="promotion-reset"
-              class="secondary-btn">
-              حملة جديدة
-            </button>
+            <div class="promotion-fields">
 
-            <p id="promotion-message" class="form-message"></p>
-            <div id="promotion-images-preview"></div>
+              <label class="promotion-field">
+                <span>رقم واتساب</span>
+                <input id="promotion-whatsapp" type="text"
+                  value="9647744040441"
+                  placeholder="9647XXXXXXXXX">
+              </label>
+
+              <label class="promotion-field">
+                <span>رسالة واتساب الجاهزة</span>
+                <textarea id="promotion-message-text" rows="3"
+                  placeholder="مرحباً، أريد الاستفسار عن العرض"></textarea>
+              </label>
+
+              <label class="promotion-field">
+                <span>نص زر الطلب</span>
+                <input id="promotion-cta" type="text"
+                  value="اطلبي الآن عبر واتساب">
+              </label>
+
+              <label class="promotion-field">
+                <span>ترتيب ظهور الحملة</span>
+                <input id="promotion-order" type="number" value="0">
+                <small>الرقم الأصغر يظهر أولاً.</small>
+              </label>
+
+            </div>
+
+            <!-- حالة الحملة -->
+            <div class="promotion-status">
+              <div>
+                <strong>حالة الحملة</strong>
+                <small>يمكنك إيقاف الحملة دون حذفها.</small>
+              </div>
+
+              <label class="promotion-switch">
+                <input id="promotion-active" type="checkbox" checked>
+                <span></span>
+              </label>
+            </div>
+
+            <!-- أزرار الحفظ -->
+            <div class="promotion-actions">
+
+              <button type="submit"
+                class="admin-btn promotion-save">
+                حفظ الحملة
+              </button>
+
+              <button type="button" id="promotion-reset"
+                class="secondary-btn">
+                حملة جديدة
+              </button>
+
+            </div>
+
+            <p id="promotion-message"
+              class="form-message" role="status"></p>
 
           </form>
 
-          <h3>الحملات الحالية</h3>
+          <h3 class="list-title">الحملات الحالية</h3>
+
           <div id="admin-promotions">
             جارٍ تحميل الحملات...
           </div>
 
         </section>
 
-        <!-- أقسام قيد التجهيز -->
-        <section id="orders-tab" class="admin-section coming-soon-card" hidden>
+        <!-- الطلبات -->
+        <section id="orders-tab"
+          class="admin-section coming-soon-card" hidden>
           <h2>إدارة الطلبات</h2>
           <p>سيتم تجهيز هذا القسم وربطه بنظام الطلبات لاحقاً.</p>
         </section>
 
-        <section id="customers-tab" class="admin-section coming-soon-card" hidden>
+        <!-- العملاء -->
+        <section id="customers-tab"
+          class="admin-section coming-soon-card" hidden>
           <h2>إدارة العملاء</h2>
           <p>سيتم تجهيز هذا القسم وربطه ببيانات العملاء لاحقاً.</p>
         </section>
 
-        <section id="settings-tab" class="admin-section coming-soon-card" hidden>
+        <!-- الإعدادات -->
+        <section id="settings-tab"
+          class="admin-section coming-soon-card" hidden>
           <h2>إعدادات المتجر</h2>
           <p>سيتم تجهيز إعدادات التواصل والشحن لاحقاً.</p>
         </section>
@@ -356,24 +420,28 @@
 <script src="admin.js?v=3"></script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('[data-section]');
-    const sections = document.querySelectorAll('.admin-section');
+document.addEventListener('DOMContentLoaded', () => {
 
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const target = button.dataset.section;
+  const buttons = document.querySelectorAll('[data-section]');
+  const sections = document.querySelectorAll('.admin-section');
 
-        sections.forEach(section => {
-          section.hidden = section.id !== target;
-        });
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
 
-        buttons.forEach(item => {
-          item.classList.toggle('active', item === button);
-        });
+      const target = button.dataset.section;
+
+      sections.forEach(section => {
+        section.hidden = section.id !== target;
       });
+
+      buttons.forEach(item => {
+        item.classList.toggle('active', item === button);
+      });
+
     });
   });
+
+});
 </script>
 
 </body>
