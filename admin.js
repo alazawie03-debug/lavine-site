@@ -94,6 +94,7 @@ function resetForm() {
 
 $('reset-form').addEventListener('click', resetForm);
 
+
 function addColorBlock(color = null) {
   const id = 'color-' + Math.random().toString(36).slice(2, 10);
 
@@ -102,25 +103,78 @@ function addColorBlock(color = null) {
   block.dataset.colorId = id;
 
   block.innerHTML = `
-    <hr>
-    <label>اسم اللون
+    <div class="color-card-heading">
+      <span>تفاصيل اللون</span>
+      <button type="button" class="remove-color secondary-btn">
+        حذف اللون
+      </button>
+    </div>
+
+    <label class="color-input-field">
+      اسم اللون
       <input class="color-name" placeholder="مثلاً: بيج" required>
     </label>
 
-    <label>صور هذا اللون (JPG)
-      <input class="color-images" type="file" accept="image/jpeg" multiple>
+    <label class="color-input-field">
+      صور هذا اللون (JPG)
+      <input class="color-images" type="file"
+        accept="image/jpeg" multiple>
     </label>
 
-    <div class="size-list"></div>
+    <div class="size-picker-area">
+      <div class="size-picker-heading">
+        <strong>اختر المقاسات المتوفرة</strong>
+        <small>اضغط على المقاس لإضافته أو إلغاء اختياره</small>
+      </div>
 
-    <button type="button" class="add-size secondary-btn">
-      + إضافة مقاس
-    </button>
+      <div class="size-options">
+        ${['فري سايز', 'M', 'L', 'XL', '2XL', '3XL'].map(size => `
+          <button type="button" class="size-chip"
+            data-size="${size}">${size}</button>
+        `).join('')}
+      </div>
 
-    <button type="button" class="remove-color secondary-btn">
-      حذف اللون
-    </button>
+      <div class="size-list"></div>
+    </div>
   `;
+
+  $('colors-container').appendChild(block);
+
+  block.querySelector('.color-name').value = color?.name || '';
+
+  if (color?.sizes) {
+    color.sizes.forEach(s => addSizeRow(block, s.size, s.quantity));
+  } else {
+    addSizeRow(block, 'فري سايز', 0);
+  }
+
+  block.querySelector('.size-options').addEventListener('click', e => {
+    const chip = e.target.closest('.size-chip');
+    if (!chip) return;
+
+    const selectedSize = chip.dataset.size;
+
+    const existingRow = [...block.querySelectorAll('.size-row')]
+      .find(row => row.querySelector('.size-name').value === selectedSize);
+
+    if (existingRow) {
+      existingRow.remove();
+      chip.classList.remove('selected');
+    } else {
+      addSizeRow(block, selectedSize, 0);
+    }
+  });
+
+  block.querySelector('.remove-color').addEventListener('click', () => {
+    block.remove();
+  });
+
+  if (color?.images) {
+    block.dataset.oldImages = JSON.stringify(color.images);
+  }
+
+  return block;
+}
 
   $('colors-container').appendChild(block);
 
