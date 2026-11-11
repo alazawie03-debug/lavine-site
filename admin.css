@@ -1,10 +1,12 @@
 
-/* =================================
+/* =========================================
    LA VINE FASHION - ADMIN DASHBOARD
-================================= */
+   Luxury Brown / Cream / Gold
+========================================= */
 
 :root {
   --admin-brown: #493027;
+  --admin-brown-dark: #302019;
   --admin-brown-light: #76513d;
   --admin-gold: #b08a55;
   --admin-gold-light: #d8bd91;
@@ -16,11 +18,34 @@
   --admin-shadow: 0 12px 35px rgba(73,48,39,.07);
 }
 
+/* General */
+
 .admin-page {
   min-height: 100vh;
+  margin: 0;
   background: var(--admin-cream);
   color: var(--admin-text);
   font-family: 'Cairo', sans-serif;
+}
+
+.admin-page *,
+.admin-page *::before,
+.admin-page *::after {
+  box-sizing: border-box;
+}
+
+.admin-page button,
+.admin-page input,
+.admin-page textarea {
+  font-family: inherit;
+}
+
+.admin-page button {
+  cursor: pointer;
+}
+
+.admin-page [hidden] {
+  display: none !important;
 }
 
 /* Header */
@@ -39,6 +64,7 @@
 
 .admin-header .brand {
   color: #fff8ed;
+  text-decoration: none;
 }
 
 .admin-header .brand-mark {
@@ -65,9 +91,9 @@
 /* Main Layout */
 
 .admin-wrap {
-  max-width: 1250px;
+  width: min(100% - 40px, 1390px);
   margin: 38px auto;
-  padding: 0 22px 50px;
+  padding-bottom: 50px;
 }
 
 .admin-panel {
@@ -76,28 +102,6 @@
   padding: 30px;
   border-radius: 16px;
   box-shadow: var(--admin-shadow);
-}
-
-.admin-panel h1 {
-  color: var(--admin-brown);
-  font-size: 27px;
-  font-weight: 800;
-  margin: 5px 0 10px;
-}
-
-.admin-panel h2 {
-  color: var(--admin-brown);
-  font-size: 22px;
-  font-weight: 800;
-}
-
-.admin-panel h3 {
-  color: var(--admin-brown);
-}
-
-.admin-panel p {
-  color: var(--admin-muted);
-  line-height: 1.8;
 }
 
 /* Login */
@@ -109,57 +113,63 @@
   border-top: 4px solid var(--admin-gold);
 }
 
+.login-panel h1 {
+  color: var(--admin-brown);
+  font-size: 27px;
+  font-weight: 800;
+  margin: 5px 0 10px;
+}
+
+.login-panel > p {
+  color: var(--admin-muted);
+  line-height: 1.8;
+}
+
 .login-panel form {
   display: grid;
   gap: 19px;
   margin-top: 28px;
 }
 
-/* Forms */
+/* Shared Labels and Inputs */
 
-.admin-panel label {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.admin-page label {
   color: var(--admin-brown);
   font-size: 13px;
   font-weight: 700;
 }
 
-.admin-panel input,
-.admin-panel textarea {
+.admin-page input:not([type="checkbox"]):not([type="file"]),
+.admin-page textarea {
   width: 100%;
-  padding: 13px 15px;
+  min-width: 0;
+  padding: 12px 14px;
   border: 1px solid #e3d7c9;
   border-radius: 9px;
   font: inherit;
-  font-size: 14px;
+  font-size: 13px;
   background: #fdfbf8;
   color: var(--admin-text);
   outline: none;
   transition: .2s;
 }
 
-.admin-panel input:focus,
-.admin-panel textarea:focus {
+.admin-page input:focus,
+.admin-page textarea:focus {
   border-color: var(--admin-gold);
   background: white;
   box-shadow: 0 0 0 3px rgba(176,138,85,.12);
 }
 
-.admin-panel input[type="checkbox"] {
+.admin-page textarea {
+  resize: vertical;
+  line-height: 1.8;
+}
+
+.admin-page input[type="checkbox"] {
   width: 17px;
   height: 17px;
   accent-color: var(--admin-brown);
-}
-
-.admin-panel input[type="file"] {
-  padding: 10px;
-  background: #f8f5ef;
-}
-
-.admin-panel textarea {
-  resize: vertical;
 }
 
 /* Buttons */
@@ -218,227 +228,24 @@
   border-bottom: 1px solid var(--admin-border);
 }
 
-/* Product Form */
-
-.product-form {
-  margin-top: 28px;
-  padding: 25px;
-  background: #fbf8f3;
-  border: 1px solid var(--admin-border);
-  border-radius: 13px;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 18px;
-}
-
-.form-grid .full-width {
-  grid-column: 1/-1;
-}
-
-.checkbox-label {
-  flex-direction: row !important;
-  align-items: center;
-  gap: 10px !important;
-}
-
-.form-actions {
-  justify-content: flex-start;
-  margin-top: 22px;
-}
-
-/* Lists */
-
-.list-title {
-  font-size: 22px;
-  color: var(--admin-brown);
-  margin: 38px 0 18px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--admin-border);
-}
-
-.admin-products {
-  display: grid;
-  gap: 14px;
-}
-
-.admin-product {
-  display: grid;
-  grid-template-columns: 100px 1fr auto;
-  gap: 18px;
-  align-items: center;
-  padding: 16px;
-  border: 1px solid var(--admin-border);
-  background: white;
-  border-radius: 12px;
-  transition: .2s;
-}
-
-.admin-product:hover {
-  border-color: var(--admin-gold-light);
-  box-shadow: 0 7px 20px rgba(73,48,39,.06);
-}
-
-.admin-product img,
-.admin-placeholder {
-  width: 100px;
-  height: 110px;
-  object-fit: cover;
-  background: #f2ece3;
-  display: grid;
-  place-items: center;
-  border-radius: 9px;
-}
-
-.admin-product h3 {
-  margin: 0;
-  font-size: 16px;
+.eyebrow {
+  color: var(--admin-gold);
+  font-size: 10px;
   font-weight: 800;
+  letter-spacing: 2px;
 }
 
-.admin-product p {
-  margin: 5px 0;
-  font-size: 12px;
-}
-
-.admin-product-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.admin-product-actions button {
-  padding: 9px 13px;
-  border: 0;
-  border-radius: 7px;
-  cursor: pointer;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  background: #f0e7dc;
+.dash-heading h1 {
   color: var(--admin-brown);
-  transition: .2s;
+  font-size: 30px;
+  margin: 8px 0;
 }
 
-.admin-product-actions button:hover {
-  background: var(--admin-gold-light);
-  color: var(--admin-brown);
+.dash-heading p:last-child {
+  color: var(--admin-muted);
 }
 
-.admin-product-actions .edit-product {
-  background: #eee5dc;
-  color: var(--admin-brown);
-}
-
-.admin-product-actions .delete-product {
-  background: #f8e8e4;
-  color: #9b3f2e;
-}
-
-/* Promotions */
-
-.promotion-admin {
-  margin-top: 25px;
-  border-top: 3px solid var(--admin-gold);
-}
-
-.promotion-admin form {
-  display: grid;
-  gap: 17px;
-  margin-top: 22px;
-}
-
-#promotion-images-preview {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-#promotion-images-preview img {
-  border: 2px solid var(--admin-border);
-}
-
-/* Responsive */
-
-@media(max-width:750px) {
-  .admin-wrap {
-    margin: 22px auto;
-    padding: 0 13px 35px;
-  }
-
-  .admin-panel {
-    padding: 20px;
-  }
-
-  .admin-header {
-    padding: 12px 15px;
-    min-height: 68px;
-  }
-
-  .admin-header > span {
-    font-size: 11px;
-  }
-
-  .admin-header > a:last-child {
-    font-size: 11px;
-  }
-
-  .admin-panel h1 {
-    font-size: 22px;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .form-grid .full-width {
-    grid-column: auto;
-  }
-
-  .admin-product {
-    grid-template-columns: 75px 1fr;
-    gap: 12px;
-  }
-
-  .admin-product img,
-  .admin-placeholder {
-    width: 75px;
-    height: 85px;
-  }
-
-  .admin-product-actions {
-    grid-column: 1/-1;
-  }
-
-  .dash-heading {
-    align-items: flex-start;
-  }
-
-  .login-panel {
-    margin: 6vh auto;
-    padding: 24px;
-  }
-}
-
-@media(max-width:400px) {
-  .admin-product-actions button {
-    padding: 8px 10px;
-    font-size: 11px;
-  }
-
-  .admin-header .brand {
-    transform: scale(.9);
-    transform-origin: right center;
-  }
-}
-
-
-/* =================================
-   LA VINE - PROFESSIONAL SIDEBAR
-================================= */
+/* Sidebar Layout */
 
 .admin-layout {
   display: grid;
@@ -449,7 +256,7 @@
 }
 
 .admin-sidebar {
-  background: linear-gradient(160deg, #493027, #302019);
+  background: linear-gradient(160deg,#493027,#302019);
   color: #fff8ed;
   padding: 22px 14px;
   border-radius: 16px;
@@ -481,7 +288,6 @@
   font-size: 13px;
   font-weight: 600;
   text-align: right;
-  cursor: pointer;
   transition: .2s;
 }
 
@@ -525,6 +331,8 @@
   color: #c5b2a0;
 }
 
+/* Main Content Sections */
+
 .admin-content {
   min-width: 0;
 }
@@ -533,7 +341,7 @@
   background: #fff;
   border: 1px solid var(--admin-border);
   border-radius: 15px;
-  padding: 26px;
+  padding: 28px;
   box-shadow: var(--admin-shadow);
 }
 
@@ -548,16 +356,17 @@
 }
 
 .section-heading h2 {
+  color: var(--admin-brown);
   font-size: 24px;
   margin: 5px 0;
 }
 
-.section-title {
-  margin: 28px 0 16px;
-  color: var(--admin-brown);
-  font-size: 19px;
-  font-weight: 800;
+.section-heading p:last-child {
+  color: var(--admin-muted);
+  font-size: 12px;
 }
+
+/* Welcome */
 
 .welcome-card {
   position: relative;
@@ -597,6 +406,13 @@
   font-size: 13px;
 }
 
+.section-title {
+  margin: 28px 0 16px;
+  color: var(--admin-brown);
+  font-size: 19px;
+  font-weight: 800;
+}
+
 .dashboard-shortcuts {
   display: grid;
   grid-template-columns: repeat(2,minmax(0,1fr));
@@ -615,7 +431,6 @@
   color: var(--admin-brown);
   font: inherit;
   text-align: right;
-  cursor: pointer;
   transition: .25s;
 }
 
@@ -667,12 +482,475 @@
 }
 
 .coming-soon-card p {
+  color: var(--admin-muted);
   font-size: 13px;
 }
 
-/* Responsive sidebar */
+/* Product Form */
+
+.product-form {
+  margin-top: 28px;
+  padding: 25px;
+  background: #fbf8f3;
+  border: 1px solid var(--admin-border);
+  border-radius: 13px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 18px;
+}
+
+.form-grid > label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-grid .full-width {
+  grid-column: 1/-1;
+}
+
+.checkbox-label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px !important;
+}
+
+.form-actions {
+  justify-content: flex-start;
+  margin-top: 22px;
+}
+
+/* Product List */
+
+.list-title {
+  font-size: 21px;
+  color: var(--admin-brown);
+  margin: 38px 0 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-products {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-product {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid var(--admin-border);
+  background: white;
+  border-radius: 12px;
+  transition: .2s;
+}
+
+.admin-product:hover {
+  border-color: var(--admin-gold-light);
+  box-shadow: 0 7px 20px rgba(73,48,39,.06);
+}
+
+.admin-product img,
+.admin-placeholder {
+  width: 100px;
+  height: 110px;
+  object-fit: cover;
+  background: #f2ece3;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+}
+
+.admin-product h3 {
+  margin: 0;
+  color: var(--admin-brown);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.admin-product p {
+  margin: 5px 0;
+  color: var(--admin-muted);
+  font-size: 12px;
+}
+
+.admin-product-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-product-actions button {
+  padding: 9px 13px;
+  border: 0;
+  border-radius: 7px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  background: #f0e7dc;
+  color: var(--admin-brown);
+  transition: .2s;
+}
+
+.admin-product-actions button:hover {
+  background: var(--admin-gold-light);
+}
+
+.admin-product-actions .edit-product {
+  background: #eee5dc;
+  color: var(--admin-brown);
+}
+
+.admin-product-actions .delete-product {
+  background: #f8e8e4;
+  color: #9b3f2e;
+}
+
+/* =========================================
+   CAMPAIGN MANAGEMENT
+========================================= */
+
+.promotion-admin {
+  margin-top: 0;
+  border-top: 3px solid var(--admin-gold);
+}
+
+.promotion-admin .section-heading {
+  margin-bottom: 28px;
+}
+
+.promotion-admin .section-heading h2 {
+  font-size: 25px;
+}
+
+/* Campaign Form */
+
+.promotion-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 20px;
+  padding: 25px;
+  border: 1px solid var(--admin-border);
+  border-radius: 15px;
+  background: #fffdfa;
+}
+
+/* Campaign Section Titles */
+
+.promotion-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.promotion-form-header h3 {
+  margin: 8px 0 5px;
+  color: var(--admin-brown);
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.promotion-form-header p {
+  margin: 0;
+  color: var(--admin-muted);
+  font-size: 12px;
+}
+
+.promotion-step {
+  color: var(--admin-gold);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.promotion-header-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: #f5eee5;
+  color: var(--admin-gold);
+  font-size: 25px;
+}
+
+.promotion-subheader {
+  margin-top: 8px;
+}
+
+/* Campaign Fields Grid */
+
+.promotion-fields {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 20px;
+}
+
+.promotion-field {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch;
+  gap: 9px !important;
+  min-width: 0;
+  color: var(--admin-brown);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.promotion-field > span {
+  display: block;
+  color: var(--admin-brown);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.promotion-field > span b {
+  color: #b65d4c;
+}
+
+.promotion-field input:not([type="file"]),
+.promotion-field textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid #e7dace;
+  border-radius: 9px;
+  background: #fcfaf7;
+  color: var(--admin-text);
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: .2s;
+}
+
+.promotion-field input:focus,
+.promotion-field textarea:focus {
+  border-color: var(--admin-gold);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(177,138,88,.10);
+}
+
+.promotion-field textarea {
+  min-height: 95px;
+  resize: vertical;
+  line-height: 1.8;
+}
+
+.promotion-field small {
+  color: var(--admin-muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* Campaign Image Upload */
+
+.promotion-upload-field {
+  grid-column: 1/-1;
+}
+
+.promotion-upload {
+  min-height: 155px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center;
+  gap: 10px !important;
+  padding: 22px;
+  border: 1px dashed #c9ad8b;
+  border-radius: 12px;
+  background: #fbf8f3;
+  cursor: pointer;
+  text-align: center;
+  transition: .2s;
+}
+
+.promotion-upload:hover {
+  border-color: var(--admin-gold);
+  background: #f7f0e6;
+}
+
+.promotion-upload-icon {
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #efe4d6;
+  color: #9b7549;
+  font-size: 25px;
+}
+
+.promotion-upload strong {
+  color: var(--admin-brown);
+  font-size: 13px;
+}
+
+.promotion-upload small {
+  color: var(--admin-muted);
+  font-size: 11px;
+}
+
+.promotion-upload input[type="file"] {
+  display: none;
+}
+
+/* Image Preview */
+
+.promotion-images-preview,
+#promotion-images-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.promotion-images-preview img,
+#promotion-images-preview img {
+  width: 105px;
+  height: 105px;
+  object-fit: cover;
+  border: 2px solid var(--admin-border);
+  border-radius: 10px;
+  background: #f5eee5;
+}
+
+/* Campaign Status */
+
+.promotion-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 17px 20px;
+  border: 1px solid var(--admin-border);
+  border-radius: 11px;
+  background: #fbf8f3;
+}
+
+.promotion-status > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.promotion-status strong {
+  color: var(--admin-brown);
+  font-size: 13px;
+}
+
+.promotion-status small {
+  color: var(--admin-muted);
+  font-size: 11px;
+}
+
+/* Toggle Switch */
+
+.promotion-switch {
+  position: relative;
+  display: inline-block !important;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.promotion-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.promotion-switch span {
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  background: #cfc5bb;
+  transition: .2s;
+}
+
+.promotion-switch span::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 3px;
+  top: 3px;
+  border-radius: 50%;
+  background: white;
+  transition: .2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15);
+}
+
+.promotion-switch input:checked + span {
+  background: #947047;
+}
+
+.promotion-switch input:checked + span::before {
+  transform: translateX(-22px);
+}
+
+/* Campaign Action Buttons */
+
+.promotion-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 5px;
+}
+
+.promotion-save {
+  min-width: 190px;
+  padding: 14px 25px;
+  background: linear-gradient(120deg,#493027,#8b6745);
+}
+
+.promotion-save:hover {
+  background: linear-gradient(120deg,#76513d,#493027);
+}
+
+.promotion-actions .secondary-btn {
+  min-height: 48px;
+}
+
+.promotion-form > .form-message {
+  margin: 0;
+  color: var(--admin-muted);
+}
+
+/* Existing Campaigns */
+
+#admin-promotions {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 15px;
+  margin-top: 18px;
+  min-width: 0;
+}
+
+#admin-promotions > * {
+  min-width: 0;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
 
 @media(max-width:850px) {
+
   .admin-layout {
     grid-template-columns: 1fr;
     gap: 15px;
@@ -708,11 +986,99 @@
   .dashboard-shortcuts {
     grid-template-columns: 1fr;
   }
+
+  #admin-promotions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media(max-width:750px) {
+
+  .admin-wrap {
+    width: calc(100% - 26px);
+    margin: 22px auto;
+    padding-bottom: 35px;
+  }
+
+  .admin-section {
+    padding: 20px;
+  }
+
+  .admin-header {
+    padding: 12px 15px;
+    min-height: 68px;
+  }
+
+  .admin-header > span {
+    font-size: 11px;
+  }
+
+  .admin-header > a:last-child {
+    font-size: 11px;
+  }
+
+  .dash-heading {
+    align-items: flex-start;
+  }
+
+  .dash-heading h1 {
+    font-size: 23px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid .full-width {
+    grid-column: auto;
+  }
+
+  .admin-product {
+    grid-template-columns: 75px 1fr;
+    gap: 12px;
+  }
+
+  .admin-product img,
+  .admin-placeholder {
+    width: 75px;
+    height: 85px;
+  }
+
+  .admin-product-actions {
+    grid-column: 1/-1;
+  }
+
+  .login-panel {
+    margin: 6vh auto;
+    padding: 24px;
+  }
+
+  .promotion-form {
+    padding: 18px;
+  }
+
+  .promotion-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .promotion-upload-field {
+    grid-column: auto;
+  }
+
+  .promotion-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .promotion-actions button {
+    width: 100%;
+  }
 }
 
 @media(max-width:500px) {
+
   .admin-section {
-    padding: 17px;
+    padding: 16px;
   }
 
   .welcome-card {
@@ -727,6 +1093,24 @@
     flex: 1 1 100px;
     font-size: 10px;
   }
-}
 
-/* LA VINE - Campaign Form */
+  .admin-product-actions button {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .admin-header .brand {
+    transform: scale(.9);
+    transform-origin: right center;
+  }
+
+  .promotion-form-header h3 {
+    font-size: 16px;
+  }
+
+  .promotion-header-icon {
+    width: 39px;
+    height: 39px;
+    flex-basis: 39px;
+  }
+}
