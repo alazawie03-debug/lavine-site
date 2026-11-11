@@ -147,18 +147,35 @@ function addColorBlock(color = null) {
   return block;
 }
 
-function addSizeRow(block, size = '', quantity = 0) {
+function addSizeRow(block, size = 'فري سايز', quantity = 0) {
   const row = document.createElement('div');
   row.className = 'size-row';
 
+  const sizes = ['فري سايز', 'M', 'L', 'XL', '2XL', '3XL'];
+
+  if (size && !sizes.includes(size)) {
+    sizes.push(size);
+  }
+
   row.innerHTML = `
-    <input class="size-name" placeholder="المقاس (M أو فري سايز)" required>
-    <input class="size-quantity" type="number" min="0" step="1"
-      placeholder="الكمية" required>
+    <label class="size-select-field">
+      المقاس
+      <select class="size-name" required>
+        <option value="">اختر المقاس</option>
+        ${sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+      </select>
+    </label>
+
+    <label class="size-quantity-field">
+      الكمية المتوفرة
+      <input class="size-quantity" type="number"
+        min="0" step="1" placeholder="أدخل الكمية" required>
+    </label>
+
     <button type="button" class="remove-size secondary-btn">حذف</button>
   `;
 
-  row.querySelector('.size-name').value = size;
+  row.querySelector('.size-name').value = size || '';
   row.querySelector('.size-quantity').value = quantity;
 
   row.querySelector('.remove-size').addEventListener('click', () => {
@@ -167,9 +184,6 @@ function addSizeRow(block, size = '', quantity = 0) {
 
   block.querySelector('.size-list').appendChild(row);
 }
-
-$('add-color').addEventListener('click', () => addColorBlock());
-
 async function uploadImage(file) {
   if (file.type !== 'image/jpeg') {
     throw new Error('ارفع الصور بصيغة JPG فقط.');
